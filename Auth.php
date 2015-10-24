@@ -12,6 +12,8 @@ class Auth
 
         if(!isset($_COOKIE['auth-key'])) setcookie('auth-key', $hash, time() * 1.5);
 
+        echo $hash;
+
     }
 
 }
