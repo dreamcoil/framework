@@ -5,7 +5,7 @@ namespace Dreamcoil;
 class Auth
 {
 
-    public function set($data = null)
+    public function set()
     {
 
         $config = new Config();
@@ -17,18 +17,13 @@ class Auth
         else
             $lifetime = ONE_DAY;
 
+        session_set_cookie_params($lifetime,"/");
+
+        session_start();
+
         $lifetime += time();
 
         if(!isset($_COOKIE['auth-key'])) setcookie('auth-key', $hash,  $lifetime);
-
-        if($data !== null)
-        {
-
-            $data = json_encode($data);
-
-            file_put_contents($hash, $data);
-
-        }
 
     }
 
