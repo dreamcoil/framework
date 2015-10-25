@@ -2,6 +2,8 @@
 
 namespace Dreamcoil;
 
+define('ONE_SECOND', 1);
+
 define('ONE_MINUTE', 60);
 
 define('ONE_HOUR', 3600);

@@ -17,11 +17,21 @@ class Auth
         else
             $lifetime = ONE_DAY;
 
-        $lifetime += time();    
+        $lifetime += time();
 
         if(!isset($_COOKIE['auth-key'])) setcookie('auth-key', $hash,  $lifetime);
 
         var_dump($lifetime);
+
+    }
+
+    public function check()
+    {
+
+        if(isset($_COOKIE['auth-key']))
+            return true;
+        else
+            return false;
 
     }
 
