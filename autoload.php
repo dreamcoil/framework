@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/Constant.php';
+require __DIR__ . '/Constants.php';
 
 require __DIR__ . '/Config.php';
 

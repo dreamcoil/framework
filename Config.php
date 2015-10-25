@@ -26,7 +26,7 @@ class Config
 
         if(isset($config[$key])) return $config[$key];
 
-        return $key;
+        return null;
 
     }
 
