@@ -10,10 +10,10 @@ class Auth
 
         $hash = hash('ripemd160', microtime(true));
 
-        if(Dreamcoil\Config::get('auth_expire') !== null)
-            $lifetime = Dreamcoil\Config::get('auth_expire');
+        if(Config::get('auth_expire') !== null)
+            $lifetime = Config::get('auth_expire');
         else
-            $lifetime = \Dreamcoil\ONE_DAY;
+            $lifetime = ONE_DAY;
 
 
         if(!isset($_COOKIE['auth-key'])) setcookie('auth-key', $hash,  $lifetime);
