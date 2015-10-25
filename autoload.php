@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/Constant.php';
+
 require __DIR__ . '/Config.php';
 
 require __DIR__ . '/Routing.php';
