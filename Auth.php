@@ -8,10 +8,12 @@ class Auth
     public function set()
     {
 
+        $config = new Config();
+
         $hash = hash('ripemd160', microtime(true));
 
-        if(Config::get('auth_expire') !== null)
-            $lifetime = Config::get('auth_expire');
+        if($config->get('auth_expire') !== null)
+            $lifetime = $config->get('auth_expire');
         else
             $lifetime = ONE_DAY;
 
