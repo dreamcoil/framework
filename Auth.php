@@ -20,7 +20,7 @@ class Auth
 
         if(!isset($_COOKIE['auth-key'])) setcookie('auth-key', $hash,  $lifetime);
 
-        echo $hash;
+        var_dump($lifetime);
 
     }
 
