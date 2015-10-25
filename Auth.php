@@ -10,7 +10,7 @@ class Auth
 
         $hash = hash('ripemd160', microtime(true));
 
-        if(!isset($_COOKIE['auth-key'])) setcookie('auth-key', $hash, time() * 1.5);
+        if(!isset($_COOKIE['auth-key'])) setcookie('auth-key', $hash,  time()+3600);
 
         echo $hash;
 
