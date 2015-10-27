@@ -28,7 +28,9 @@ class Route
     public function getArgs()
     {
 
-        return explode('/',$this->get());
+        $return = explode('/',$this->get());
+
+        return $return;
 
     }
 
@@ -71,17 +73,30 @@ class Route
                     if($var == $this->getArgs()[$i])
                     {
 
-                        $return = false;
+                        $return[$i] = true;
 
                     }
                     else
                     {
 
-                        $var_name = str_replace(array('{','}'),array('',''), $var);
+                        if(strpos($var,'{') !== false)
+                        {
 
-                        $data[$var_name] = $this->getArgs()[$i];
+                            //echo $var . ' = ' . $this->getArgs()[$i] . ' | ';
 
-                        $return = true;
+                            $return[$i] = true;
+
+                            $var_name = str_replace(array('{','}'),array('',''), $var);
+
+                            $data[$var_name] = $this->getArgs()[$i];
+
+                        }
+                        else
+                        {
+
+                            $return[$i] = false;
+
+                        }
 
                     }
 
@@ -90,10 +105,11 @@ class Route
 
                 }
 
-                if(!$return)
+
+                if(in_array(false, $return))
                     return false;
 
-                elseif($return)
+                else
                 {
 
                     $this->data = $data;
