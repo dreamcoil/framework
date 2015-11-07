@@ -11,7 +11,7 @@ class Translate
 
         $this->lang = $lang;
 
-        define('DREAMCOILLANG', $lang);
+        define('DREAMCOIL_LANG', $lang);
 
     }
 
@@ -24,7 +24,9 @@ class Translate
 
         $fallback = $config->get('fallback_lang');
 
-        if(DREAMCOILLANG === null)
+        var_dump('DREAMCOIL_LANG');
+
+        if('DREAMCOIL_LANG' === null)
         {
             if(!file_exists( __DIR__ . '/../files/Translations/' . $fallback . '/'. $key[0] . '.php'))
                 return implode('.', $key);
@@ -37,10 +39,10 @@ class Translate
 
         }
 
-        if(!file_exists( __DIR__ . '/../files/Translations/' . DREAMCOILLANG . '/'. $key[0] . '.php'))
+        if(!file_exists( __DIR__ . '/../files/Translations/' . 'DREAMCOIL_LANG' . '/'. $key[0] . '.php'))
             return implode('.', $key);
 
-        $lang = include __DIR__ . '/../files/Translations/' . DREAMCOILLANG . '/'. $key[0] . '.php';
+        $lang = include __DIR__ . '/../files/Translations/' . 'DREAMCOIL_LANG' . '/'. $key[0] . '.php';
 
         if(isset($lang[$key[1]])) return $lang[$key[1]];
 
