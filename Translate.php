@@ -33,6 +33,8 @@ class Translate
 
             if(isset($lang[$key[1]])) return $lang[$key[1]];
 
+            echo 1;
+
             return implode('.', $key);
 
         }
