@@ -11,6 +11,8 @@ class Translate
 
         $this->lang = $lang;
 
+        define('DREAMCOIL_LANG', $lang);
+
     }
 
     public function get($key)
@@ -22,7 +24,7 @@ class Translate
 
         $fallback = $config->get('fallback_lang');
 
-        if(is_object($this))
+        if(!isset(DREAMCOIL_LANG))
         {
             if(!file_exists( __DIR__ . '/../files/Translations/' . $fallback . '/'. $key[0] . '.php'))
                 return implode('.', $key);
