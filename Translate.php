@@ -24,7 +24,7 @@ class Translate
 
         $fallback = $config->get('fallback_lang');
 
-        if(!isset(DREAMCOIL_LANG))
+        if(DREAMCOIL_LANG === null)
         {
             if(!file_exists( __DIR__ . '/../files/Translations/' . $fallback . '/'. $key[0] . '.php'))
                 return implode('.', $key);
