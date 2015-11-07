@@ -22,7 +22,7 @@ class Translate
 
         $fallback = $config->get('fallback_lang');
 
-        if(!is_object($this) AND !isset($this->lang))
+        if(is_object($this))
         {
             if(!file_exists( __DIR__ . '/../files/Translations/' . $fallback . '/'. $key[0] . '.php'))
                 return implode('.', $key);
