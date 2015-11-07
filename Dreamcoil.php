@@ -3,11 +3,13 @@
 class Dreamcoil 
 {
 
-    public function url($url = null)
-    {
-        
-        return $url;
-        
-    }
+	public function url($url)
+	{
+
+		$route = str_replace(ROUTE, '', $_SERVER['REQUEST_URI']);
+
+		return $route . $url;
+
+	}
     
 }

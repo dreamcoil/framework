@@ -2,24 +2,6 @@
 
 namespace Dreamcoil;
 
-/**
- * Returns the full URL
- *
- * @param $url
- * 
- * @return string
- */
-function url($url)
-{
-
-	$route = str_replace(ROUTE, '', $_SERVER['REQUEST_URI']);
-
-	return $route . $url;
-
-}
-
-
-
 class Route
 {
 
