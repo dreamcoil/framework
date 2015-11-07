@@ -33,16 +33,14 @@ class Translate
 
             if(isset($lang[$key[1]])) return $lang[$key[1]];
 
-            echo 1;
-
             return implode('.', $key);
 
         }
 
-        if(!file_exists( __DIR__ . '/../files/Translations/' . $this->lang . '/'. $key[0] . '.php'))
+        if(!file_exists( __DIR__ . '/../files/Translations/' . 'DREAMCOIL_LANG' . '/'. $key[0] . '.php'))
             return implode('.', $key);
 
-        $lang = include __DIR__ . '/../files/Translations/' . $this->lang . '/'. $key[0] . '.php';
+        $lang = include __DIR__ . '/../files/Translations/' . 'DREAMCOIL_LANG' . '/'. $key[0] . '.php';
 
         if(isset($lang[$key[1]])) return $lang[$key[1]];
 
