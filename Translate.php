@@ -47,10 +47,10 @@ class Translate
 
     }
 
-    public function say($key)
+    public function say($key, $lang = null)
     {
 
-        echo Translate::get($key);
+        echo Translate::get($key, $lang);
 
         return null;
 
