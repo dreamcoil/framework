@@ -16,9 +16,11 @@ class Translate
     public function get($key)
     {
 
+        $config = new \Dreamcoil\Config;
+
         $key = explode('.',$key);
 
-        $fallback = \Dreamcoil\Config::get('fallback_lang');
+        $fallback = $config->get('fallback_lang');
 
         if(!isset($this->lang))
         {
@@ -48,6 +50,8 @@ class Translate
     {
 
         echo Translate::get($key);
+
+        return null;
 
     }
 
