@@ -44,4 +44,11 @@ class Translate
 
     }
 
+    public function say($key)
+    {
+
+        echo Translate::get($key);
+
+    }
+
 }
