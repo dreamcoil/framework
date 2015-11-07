@@ -24,7 +24,7 @@ class Translate
 
         $fallback = $config->get('fallback_lang');
 
-        var_dump('DREAMCOIL_LANG');
+        var_dump(constant('DREAMCOIL_LANG'));
 
         if('DREAMCOIL_LANG' === null)
         {
