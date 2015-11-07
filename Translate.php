@@ -11,11 +11,9 @@ class Translate
 
         $this->lang = $lang;
 
-        define('DREAMCOIL_LANG', $lang);
-
     }
 
-    public function get($key)
+    public function get($key, $lang = null)
     {
 
         $config = new \Dreamcoil\Config;
@@ -24,9 +22,7 @@ class Translate
 
         $fallback = $config->get('fallback_lang');
 
-        var_dump(constant('DREAMCOIL_LANG'));
-
-        if('DREAMCOIL_LANG' === null)
+        if($lang = null)
         {
             if(!file_exists( __DIR__ . '/../files/Translations/' . $fallback . '/'. $key[0] . '.php'))
                 return implode('.', $key);
@@ -39,10 +35,10 @@ class Translate
 
         }
 
-        if(!file_exists( __DIR__ . '/../files/Translations/' . 'DREAMCOIL_LANG' . '/'. $key[0] . '.php'))
+        if(!file_exists( __DIR__ . '/../files/Translations/' . $lang . '/'. $key[0] . '.php'))
             return implode('.', $key);
 
-        $lang = include __DIR__ . '/../files/Translations/' . 'DREAMCOIL_LANG' . '/'. $key[0] . '.php';
+        $lang = include __DIR__ . '/../files/Translations/' . $lang . '/'. $key[0] . '.php';
 
         if(isset($lang[$key[1]])) return $lang[$key[1]];
 
