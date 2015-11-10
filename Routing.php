@@ -20,7 +20,7 @@ class Route
 
         if($params) return $explode;
 
-        return $explode[1];
+        return $explode[0];
 
     }
 
