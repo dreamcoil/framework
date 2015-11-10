@@ -11,6 +11,8 @@ class Route
     /**
      * Returns the current URL
      *
+	 * @param $params
+     *
      * @return string/array
      */
     public function get($params = false)
