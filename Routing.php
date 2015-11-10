@@ -11,12 +11,16 @@ class Route
     /**
      * Returns the current URL
      *
-     * @return string
+     * @return string/array
      */
-    public function get()
+    public function get($params = false)
     {
 
-        return ROUTE;
+        $explode = explode('?', ROUTE);
+
+        if($params) return $explode;
+
+        return $explode[1];
 
     }
 
