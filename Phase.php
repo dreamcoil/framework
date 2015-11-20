@@ -1,5 +1,7 @@
 <?php
 
+namespace Dreamcoil;
+
 class Phase 
 {
 	private $config;
