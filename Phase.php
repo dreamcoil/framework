@@ -4,7 +4,7 @@ namespace Dreamcoil;
 
 class Phase 
 {
-	private $config;
+	public $config;
 
 
 	public function __construct()
