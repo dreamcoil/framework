@@ -8,7 +8,7 @@ class Phase
 	public function __construct()
 	{
 
-		$config = new \Dreamcoil\Config;
+		$this->config = new \Dreamcoil\Config;
 
 	}
 
