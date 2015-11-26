@@ -11,6 +11,8 @@ class Translate
 
         $this->lang = $lang;
 
+        setcookie('lang', $lang, time() * 2);
+
     }
 
     public function get($key, $lang = null)

@@ -11,7 +11,7 @@ class Layout
 
         $this->view = new \Dreamcoil\View();
 
-        $this->layout;
+        $this->layout = $layout;
 
         $this->data = $data;
 
