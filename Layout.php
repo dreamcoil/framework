@@ -15,14 +15,14 @@ class Layout
 
         $this->data = $data;
 
-        $this->view->inc('layouts.' . $this->layout . 'head', $this->data);
+        $this->view->inc('layouts.' . $this->layout . '.head', $this->data);
 
     }
 
     public function __destruct()
     {
 
-        $this->view->inc('layouts.' . $this->layout . 'foot', $this->data);
+        $this->view->inc('layouts.' . $this->layout . '.foot', $this->data);
 
     }
 
