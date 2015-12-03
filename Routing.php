@@ -11,7 +11,7 @@ class Route
     /**
      * Returns the current URL
      *
-	 * @param $params
+     * @param $params
      *
      * @return string/array
      */
@@ -68,7 +68,9 @@ class Route
 
             $argv = explode('/',$route);
 
-            if(count($argv) == count($this->getArgs()))
+            $args = $this->getArgs();
+
+            if(count($argv) == count($args))
             {
 
                 $i = 0;
@@ -76,7 +78,7 @@ class Route
                 foreach($argv as $var)
                 {
 
-                    if($var == $this->getArgs()[$i])
+                    if($var == $args[$i])
                     {
 
                         $return[$i] = true;
@@ -88,13 +90,11 @@ class Route
                         if(strpos($var,'{') !== false)
                         {
 
-                            //echo $var . ' = ' . $this->getArgs()[$i] . ' | ';
-
                             $return[$i] = true;
 
                             $var_name = str_replace(array('{','}'),array('',''), $var);
 
-                            $data[$var_name] = $this->getArgs()[$i];
+                            $data[$var_name] = $args[$i];
 
                         }
                         else
