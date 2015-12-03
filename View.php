@@ -47,7 +47,15 @@ class View
         if(!file_exists($returnView))
         {
 
-            $it = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->viewFolder));
+            $dir = $path;
+
+            $dir = explode('/', $dir);
+
+            unset($dir[count($dir) - 1]);
+
+            $dir = implode('/', $dir);
+
+            $it = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->viewFolder . $dir));
 
             while ($it->valid())
             {
@@ -55,14 +63,11 @@ class View
                 if (!$it->isDot())
                 {
 
-
-
                     $cache['SelectView'] = strrev($path);
 
                     $cache['SelectView'] = explode("/", $cache['SelectView'])[0];
 
                     $cache['SelectView'] = strrev($cache['SelectView']);
-
 
                     $cache['ReturnView'] = explode(".", $it->key());
 
