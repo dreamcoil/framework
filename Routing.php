@@ -48,7 +48,7 @@ class Route
     public function set($to)
     {
 
-        header('Location: ' . substr(PHP_DIR, 0, -1) . $to);
+        header('Location: ' . $to);
 
     }
 
