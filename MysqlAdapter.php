@@ -2,7 +2,7 @@
 
 namespace Dreamcoil;
 
-class MysqlAdapter()
+class MysqlAdapter
 {
     private $host;
     private $user;
