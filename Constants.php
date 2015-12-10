@@ -2,6 +2,12 @@
 
 namespace Dreamcoil;
 
+//Constants for dreamcoil
+
+define('DREAMCOIL_VERSION', 0.1);
+
+//Constants for the time
+
 define('ONE_SECOND', 1);
 
 define('ONE_MINUTE', 60);
