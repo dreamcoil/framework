@@ -18,6 +18,8 @@ require __DIR__ . '/MysqlAdapter.php';
 
 require __DIR__ . '/Codebowl/Title.php';
 
+require __DIR__ . '/Codebowl/Verify.php';
+
 require __DIR__ . '/Dreamcoil.php';
 
 require __DIR__ . '/Phase.php';
