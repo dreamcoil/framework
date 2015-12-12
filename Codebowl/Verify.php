@@ -46,4 +46,13 @@ class Verify
 
 	}
 
+	public function name($name)
+	{
+
+		if(preg_match("/((\b[A-Z,ü,ö,ä]{1}[a-z,ü,ö,ä]{2,}).){2,}/", $name)) return true;
+
+		return false;
+
+	}
+
 }
