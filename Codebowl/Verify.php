@@ -26,17 +26,17 @@ class Verify
 					break;
 
 				case 1:	
-					if(preg_match("([a-z])", $password) && preg_match("([A-Z])", $password)) return true;
+					if(preg_match("/([a-z])/g", $password) && preg_match("/([A-Z])/g", $password)) return true;
 					return false;
 					break;
 
 				case 2:
-					if(preg_match("([a-z])", $password) && preg_match("([A-Z])", $password) && preg_match("([1-9])", $password)) return true;
+					if(preg_match("/([a-z])/g", $password) && preg_match("/([A-Z])/g", $password) && preg_match("/([1-9])/g", $password)) return true;
 					return false;
 					break;
 
 				case 3:
-					if(preg_match("(?=(.*[a-z])+)(?=(.*[0-9])+)[0-9a-zA-Z!\"#$%&'()*+,\-.\/:;<=>?@\[\\\]^_`{|}~]{" . $length . ",99}", $password)) return true;
+					if(preg_match("/(?=(.*[a-z])+)(?=(.*[0-9])+)[0-9a-zA-Z!\"#$%&'()*+,\-.\/:;<=>?@\[\\\]^_`{|}~]{" . $length . ",99}/g", $password)) return true;
 					return false;
 					break;
 			}
