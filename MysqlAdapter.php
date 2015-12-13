@@ -54,7 +54,11 @@ class MysqlAdapter
 
             throw new \Exception(mysqli_error($this->connection()));
 
+            return false;
+
         }
+
+        return true;
 
     }
 
