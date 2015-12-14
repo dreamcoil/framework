@@ -6,6 +6,12 @@ class Layout
 {
     private $layout, $data, $view;
 
+    /**
+     * Loads a Layout
+     *
+     * @param $layout
+     * @param array $data
+     */
     public function __construct($layout, $data = array())
     {
 
@@ -19,6 +25,9 @@ class Layout
 
     }
 
+    /**
+     * Finished the layout
+     */
     public function __destruct()
     {
 

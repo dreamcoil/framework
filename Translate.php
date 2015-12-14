@@ -6,6 +6,11 @@ class Translate
 {
     private $lang;
 
+    /**
+     * Sets the language
+     *
+     * @param $lang
+     */
     public function setLang($lang)
     {
 
@@ -15,6 +20,13 @@ class Translate
 
     }
 
+    /**
+     * Gets the translation for a translation key
+     *
+     * @param $key
+     * @param null $lang
+     * @return string
+     */
     public function get($key, $lang = null)
     {
 
@@ -49,6 +61,13 @@ class Translate
 
     }
 
+    /**
+     * Echos a translation
+     * 
+     * @param $key
+     * @param null $lang
+     * @return null
+     */
     public function say($key, $lang = null)
     {
 

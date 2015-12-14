@@ -6,6 +6,9 @@ class Config
 {
     private $config;
 
+    /**
+     * Loads the config
+     */
     public function __construct()
     {
 
@@ -15,6 +18,12 @@ class Config
 
     }
 
+    /**
+     * Gets the value for the config key
+     * 
+     * @param $key
+     * @return null|string
+     */
     public function get($key)
     {
 
