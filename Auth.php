@@ -5,6 +5,12 @@ namespace Dreamcoil;
 class Auth
 {
 
+    /**
+     * Creates an authentication session.
+     * Uses auth_expire on the config to get the session lifetime.
+     *
+     * @param null $data
+     */
     public function set($data = null)
     {
 
@@ -29,6 +35,11 @@ class Auth
 
     }
 
+    /**
+     * Checks if the user is authenitcated
+     *
+     * @return bool
+     */
     public function check()
     {
 
