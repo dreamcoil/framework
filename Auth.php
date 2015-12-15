@@ -68,4 +68,14 @@ class Auth
 
     }
 
+    /**
+     * Starting a sessopn
+     */
+    public function start()
+    {
+
+        session_start();
+
+    }
+
 }
