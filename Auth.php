@@ -50,4 +50,22 @@ class Auth
 
     }
 
+    /**
+     * Destroys a current function
+     *
+     * @return bool
+     */
+    public function destroy()
+    {
+
+        unset($_COOKIE['auth-key']);
+
+        session_destroy();
+
+        if($_COOKIE['auth-key'] === null) return true;
+
+        return false;
+
+    }
+
 }
