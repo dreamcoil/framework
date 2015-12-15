@@ -3,6 +3,13 @@
 class Dreamcoil 
 {
 
+	/**
+	 * Returns a relative/absolute URL
+	 *
+	 * @param $url
+	 * @param bool|false $full decides if you want a relative or absolute URL
+	 * @return string
+	 */
 	public function url($url, $full = false)
 	{
 
@@ -16,12 +23,31 @@ class Dreamcoil
 
 	}
 
+	/**
+	 * Echos a translation for given translation key
+	 *
+	 * @param $key
+	 * @param null $lang
+	 * @return null
+	 */
 	public function __($key, $lang = null)
 	{
 
 		\Dreamcoil\Translate::say($key, $lang);
 
 		return null;
+
+	}
+
+	/**
+	 * Returns an object
+	 * @param array $array
+	 * @return object
+	 */
+	public function toObject(array $array)
+	{
+
+		return json_encode(json_decode($array));
 
 	}
     
