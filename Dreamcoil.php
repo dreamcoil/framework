@@ -47,7 +47,7 @@ class Dreamcoil
 	public function toObject(array $array)
 	{
 
-		return json_encode(json_decode($array));
+		return json_decode(json_encode($array));
 
 	}
     
