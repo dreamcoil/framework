@@ -133,6 +133,19 @@ class MysqlAdapter
     }
 
     /**
+     * Fetches the data from a query
+     *
+     * @param $result   
+     * @return array
+     */
+    public function fetch($result)
+    {
+
+        return mysqli_fetch_assoc($result);
+
+    }
+
+    /**
      * @param $var
      */
     public function debug($var)
