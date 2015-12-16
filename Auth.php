@@ -25,7 +25,7 @@ class Auth
 
         session_set_cookie_params($lifetime,"/");
 
-        if($_SESSNION === null) session_start();
+        if(session_id() == "") session_start();
 
         $lifetime += time();
 
