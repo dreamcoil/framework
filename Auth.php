@@ -60,9 +60,9 @@ class Auth
 
         setcookie('auth-key' , null, time() - ONE_DAY);
 
-        unset($_COOKIE['auth-key']);
+        if($_COOKIE['auth-key'] !== null) unset($_COOKIE['auth-key']);
 
-        session_destroy();
+        if(session_id() != "") session_destroy();
 
         if($_COOKIE['auth-key'] === null) return true;
 
