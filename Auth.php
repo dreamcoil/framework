@@ -60,7 +60,7 @@ class Auth
 
         setcookie('auth-key' , null, time() - ONE_DAY);
 
-        if($_COOKIE['auth-key'] !== null) unset($_COOKIE['auth-key']);
+        $_COOKIE['auth-key'] == null;
 
         if(session_id() != "") session_destroy();
 
