@@ -58,6 +58,8 @@ class Auth
     public function destroy()
     {
 
+        setcookie('auth-key' , null, time() - ONE_DAY);
+
         unset($_COOKIE['auth-key']);
 
         session_destroy();
