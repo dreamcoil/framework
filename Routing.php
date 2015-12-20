@@ -177,7 +177,7 @@ class Route
      */
     public function getError()
     {
-        global $show404
+        global $show404;
 
         if($show404 === null) return 404;
 
