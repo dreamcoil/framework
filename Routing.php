@@ -120,6 +120,8 @@ class Route
 
                     $this->data = $data;
 
+                    if('DREAMCOIL_404' === null) define('DREAMCOIL_404', false);
+
                     return true;
 
                 }
@@ -130,7 +132,14 @@ class Route
 
         }
 
-        if($this->get() == $route) return true;
+        if($this->get() == $route)
+        { 
+
+            if('DREAMCOIL_404' === null) define('DREAMCOIL_404', false);
+
+            return true;
+
+        }
 
         return false;
 
@@ -158,5 +167,19 @@ class Route
 
     }
 
+
+
+    /**
+     * Returns an error code for the routing
+     *
+     * @return int
+     */
+    public function getError()
+    {
+
+
+        if('DREAMCOIL_404' === null) return 404;
+
+    }
 
 }
