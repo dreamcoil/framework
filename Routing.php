@@ -60,6 +60,7 @@ class Route
      */
     public function is($route)
     {
+        global $show404;
 
         if(isset($this->group)) $route = '/' . $this->group . '/' . $route;
 
@@ -120,7 +121,7 @@ class Route
 
                     $this->data = $data;
 
-                    if('DREAMCOIL_404' === null) define('DREAMCOIL_404', false);
+                    $show404 = false;
 
                     return true;
 
@@ -135,7 +136,7 @@ class Route
         if($this->get() == $route)
         { 
 
-            if('DREAMCOIL_404' === null) define('DREAMCOIL_404', false);
+            $show404 = false;
 
             return true;
 
@@ -176,9 +177,9 @@ class Route
      */
     public function getError()
     {
+        global $show404
 
-
-        if('DREAMCOIL_404' === null) return 404;
+        if($show404 === null) return 404;
 
     }
 
