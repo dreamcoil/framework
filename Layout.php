@@ -2,7 +2,7 @@
 
 namespace Dreamcoil;
 
-class Layout
+class Layout extends Phase
 {
     private $layout, $data, $view;
 
@@ -14,6 +14,8 @@ class Layout
      */
     public function __construct($layout, $data = array())
     {
+
+        parent::__construct();
 
         $this->view = new \Dreamcoil\View();
 
@@ -32,6 +34,8 @@ class Layout
     {
 
         $this->view->inc('layouts.' . $this->layout . '.foot', $this->data);
+
+        if(isset(Debug::get()) && $this->config->get('debug')) echo '<pre>' . Debug::get() . '</pre>';
 
     }
 
