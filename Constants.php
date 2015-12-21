@@ -21,8 +21,8 @@ define('ONE_WEEK', 604800);
 define('ONE_YEAR', 30585600);
 
 
-define('LOG_INFO', '[info]');
+define('LOG_INFO_TEXT', '[info]');
 
-define('LOG_WARN', '[Warn]');
+define('LOG_WARN_TEXT', '[Warn]');
 
-define('LOG_ERROR', '[ERROR]');
+define('LOG_ERROR_TEXT', '[ERROR]');

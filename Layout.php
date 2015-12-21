@@ -34,10 +34,6 @@ class Layout
 
         $this->view->inc('layouts.' . $this->layout . '.foot', $this->data);
 
-        $debug = Debug::get();
-
-        if(isset($debug) && $config->get('debug')) echo '<pre>' . $debug . '</pre>';
-
     }
 
 }
