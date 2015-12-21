@@ -55,7 +55,11 @@ class Translate
 
         $lang = include __DIR__ . '/../files/Translations/' . $lang . '/'. $key[0] . '.php';
 
-        if(isset($lang[$key[1]])) return $lang[$key[1]];
+        if(isset($lang[$key[1]])) return str_replace(
+            ['ü',     'ö',     'ä',     'Ü',     'Ö',     'Ä',     'ß'], 
+            ['&uuml;','&ouml;','&auml;','&Uuml;','&Ouml;','&Auml;','&szlig;'], 
+            $lang[$key[1]]
+            );
 
         return implode('.', $key);
 
