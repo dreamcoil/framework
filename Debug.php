@@ -4,6 +4,7 @@ namespace Dreamcoil;
 
 class Debug
 {
+	
 	/**
 	 * Adds an information to the debug console
 	 * 

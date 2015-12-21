@@ -15,8 +15,6 @@ class Layout
     public function __construct($layout, $data = array())
     {
 
-        parent::__construct();
-
         $this->view = new \Dreamcoil\View();
 
         $this->layout = $layout;
