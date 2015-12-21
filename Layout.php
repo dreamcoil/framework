@@ -35,7 +35,9 @@ class Layout extends Phase
 
         $this->view->inc('layouts.' . $this->layout . '.foot', $this->data);
 
-        if(isset(Debug::get()) && $this->config->get('debug')) echo '<pre>' . Debug::get() . '</pre>';
+        $debug = Debug::get();
+
+        if(isset($debug) && $this->config->get('debug')) echo '<pre>' . $debug . '</pre>';
 
     }
 
