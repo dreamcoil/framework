@@ -2,7 +2,7 @@
 
 namespace Dreamcoil;
 
-class Layout extends Phase
+class Layout
 {
     private $layout, $data, $view;
 
@@ -32,12 +32,13 @@ class Layout extends Phase
      */
     public function __destruct()
     {
+        global $config;
 
         $this->view->inc('layouts.' . $this->layout . '.foot', $this->data);
 
         $debug = Debug::get();
 
-        if(isset($debug) && $this->config->get('debug')) echo '<pre>' . $debug . '</pre>';
+        if(isset($debug) && $config->get('debug')) echo '<pre>' . $debug . '</pre>';
 
     }
 
