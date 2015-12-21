@@ -19,3 +19,10 @@ define('ONE_DAY', 86400);
 define('ONE_WEEK', 604800);
 
 define('ONE_YEAR', 30585600);
+
+
+define('LOG_INFO', '[info]');
+
+define('LOG_WARN', '[Warn]');
+
+define('LOG_ERROR', '[ERROR]');
