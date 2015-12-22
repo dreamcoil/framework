@@ -57,4 +57,13 @@ class Verify
 
 	}
 
+	public function timestamp($timestamp)
+	{
+
+		if($timestamp <= time() && $timestamp > time() / 2 && is_numeric($timestamp)) return true;
+
+		return false;
+
+	}
+
 }
