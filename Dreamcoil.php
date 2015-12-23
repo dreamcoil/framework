@@ -47,8 +47,10 @@ class Dreamcoil
 	public function toObject(array $array)
 	{
 
-		return json_decode(json_encode($array));
+		if(is_array($array)) return json_decode(json_encode($array));
 
+		else throw new Exception("Only a array can be converted to an object");
+	
 	}
     
 }
