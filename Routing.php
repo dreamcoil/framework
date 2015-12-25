@@ -18,7 +18,7 @@ class Route
     public function get($params = false)
     {
 
-        $explode = explode('?', 'ROUTE');
+        $explode = explode('?', ROUTE);
 
         if($params) return $explode;
 
