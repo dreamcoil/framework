@@ -16,6 +16,8 @@ require __DIR__ . '/Auth.php';
 
 require __DIR__ . '/MysqlAdapter.php';
 
+require __DIR__ . '/Getter.php';
+
 require __DIR__ . '/Codebowl/Title.php';
 
 require __DIR__ . '/Codebowl/Verify.php';
