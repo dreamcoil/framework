@@ -6,6 +6,13 @@ class Getter
 {
 
 	private $error;
+
+	public function __construct()
+	{
+
+		$this->error = false;
+
+	}
 	
 	public function constant($constant)
 	{
