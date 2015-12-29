@@ -16,7 +16,7 @@ class Debug
 	{
 		global $dreamcoil_debug;
 
-		if(is_string($info)) $dreamcoil_debug .= "\n " $level . " " . date(DATE_RFC2822) . " " . $info;
+		if(is_string($info)) $dreamcoil_debug .= "\n " . $level . " " . date(DATE_RFC2822) . " " . $info;
 
 		else throw new \Exception("The debug text must to be a string");
 		
