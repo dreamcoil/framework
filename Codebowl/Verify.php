@@ -66,4 +66,13 @@ class Verify
 
 	}
 
+	public function statement($statement)
+	{
+
+		if($statement == "yes" || $statement == "no") return true;
+
+		return false;
+
+	}
+
 }
