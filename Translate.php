@@ -13,10 +13,11 @@ class Translate
      */
     public function setLang($lang)
     {
+        global $console;
 
         $this->lang = $lang;
 
-        setcookie('lang', $lang, time() * 2);
+        if(isset($console)) setcookie('lang', $lang, time() * 2);
         
         return true;
 
