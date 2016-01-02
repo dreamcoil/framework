@@ -34,7 +34,7 @@ class Debug
 
 		if(!$html) return $dreamcoil_debug;
 
-		$dreamcoil_debug = '<pre><code>' . $dreamcoil_debug . '</code></pre>'
+		$dreamcoil_debug = '<pre><code>' . $dreamcoil_debug . '</code></pre>';
 
 		$dreamcoil_debug = str_replace('[info]', '<span style="color: blue">[info]</span>', $dreamcoil_debug);
 
