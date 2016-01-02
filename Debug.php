@@ -28,9 +28,19 @@ class Debug
 	 *
 	 * @return string
 	 */
-	public function get()
+	public function get($html = false)
 	{
 		global $dreamcoil_debug;
+
+		if(!$html) return $dreamcoil_debug;
+
+		$dreamcoil_debug = '<pre><code>' . $dreamcoil_debug . '</code></pre>'
+
+		$dreamcoil_debug = str_replace('[info]', '<span style="color: blue">[info]</span>', $dreamcoil_debug);
+
+		$dreamcoil_debug = str_replace('[Warn]', '<span style="color: orange">[Warn]</span>', $dreamcoil_debug);
+
+		$dreamcoil_debug = str_replace('[ERRORR]', '<span style="color: orange">[ERROR]</span>', $dreamcoil_debug);
 
 		return $dreamcoil_debug;
 
