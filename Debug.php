@@ -40,7 +40,7 @@ class Debug
 
 		$dreamcoil_debug = str_replace('[Warn]', '<span style="color: orange">[Warn]</span>', $dreamcoil_debug);
 
-		$dreamcoil_debug = str_replace('[ERROR]', '<span style="color: darkred">[ERROR]</span>', $dreamcoil_debug);
+		$dreamcoil_debug = str_replace('[ERROR]', '<span style="color: red">[ERROR]</span>', $dreamcoil_debug);
 
 		return $dreamcoil_debug;
 
