@@ -239,8 +239,9 @@ class MysqlAdapter
     {
 
     	$data = str_replace(
-    		["<",    ">",    "'"] , 
-    		["&lt;", "&gt;", "&#39;"], $data);
+    		["<",    ">",    "'",   , "Ä",    , "ä"     , "Ö",    ,  "ö"    , "Ü"     , "ü"     ] , 
+    		["&lt;", "&gt;", "&#39;", "&Auml;", "&auml;", "&Ouml;", "&ouml;", "&Uuml;", "&uuml;"] , 
+    		$data);
 
     	return $data;
 
