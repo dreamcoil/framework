@@ -38,6 +38,10 @@ class MysqlAdapter
 
         if(isset($opts['collect'])) $this->opts['collect'] = $opts['collect'];
 
+        $this->opts['chartset'] = "utf8";
+
+        if(isset($opts['chartset'])) $this->opts['chartset'] = $opts['chartset'];
+
         $this->unitTest = FALSE;
 
     }
@@ -84,6 +88,8 @@ class MysqlAdapter
             $this->password,
             $this->database,
             $this->port);
+
+        mysqli_set_charset($this->connection, $this->opts['chartset']);
 
         $this->checkConnection();
 
@@ -175,7 +181,7 @@ class MysqlAdapter
             $rows[$i] = "`" . $row . "`";
 
             if ($content == NULL) $values[$i] = "NULL";
-            else $values[$i] = "'" . $content . "'";
+            else $values[$i] = "'" . mysqli_real_escape_string($content) . "'";
 
             $i++;
 
