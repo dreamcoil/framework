@@ -174,7 +174,7 @@ class MysqlAdapter
 
     	}
 
-    	return $data;
+    	return $return;
 
     }
 
