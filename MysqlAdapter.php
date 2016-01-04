@@ -151,6 +151,20 @@ class MysqlAdapter
 
     }
 
+
+    /**
+     * Fetches the data from a query and returns it in an array
+     *
+     * @param $result   
+     * @return array
+     */
+    public function fetch_array($result)
+    {
+
+    	return mysqli_fetch_array($result, MYSQLI_NUM);
+
+    }
+
     /**
      * @param $var
      */
