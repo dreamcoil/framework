@@ -181,7 +181,7 @@ class MysqlAdapter
             $rows[$i] = "`" . $row . "`";
 
             if ($content == NULL) $values[$i] = "NULL";
-            else $values[$i] = "'" . mysqli_real_escape_string($content) . "'";
+            else $values[$i] = "'" . mysqli_real_escape_string($this->connection, $content) . "'";
 
             $i++;
 
