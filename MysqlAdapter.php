@@ -181,7 +181,7 @@ class MysqlAdapter
             $rows[$i] = "`" . $row . "`";
 
             if ($content == NULL) $values[$i] = "NULL";
-            else $values[$i] = "'" . mysqli_real_escape_string($this->connection, $content) . "'";
+            else $values[$i] = "'" . $this->webEscape($content) . "'";
 
             $i++;
 
@@ -199,6 +199,23 @@ class MysqlAdapter
         else $this->collectData .= "\n" . $query;
 
         return NULL;
+
+    }
+
+	/**
+	 * Escapes an data for a query
+	 *
+     * @param string $data
+     * @return string
+     */
+    public function webEscape($data)
+    {
+
+    	$data = str_replace(
+    		["<",    ">",    "'"] , 
+    		["&lt;", "&gt;", "&#39;"], $data);
+
+    	return $data;
 
     }
 
