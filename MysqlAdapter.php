@@ -229,6 +229,26 @@ class MysqlAdapter
 
     }
 
+    /**
+     * Get stats about the Mysql Server
+     *
+     * @return string
+     * @throws Exception
+     */
+    public function stat()
+    {
+
+		if($this->checkConnection())
+		{
+
+    		return mysqli_stat($this->connection);
+
+    	}
+    	else throw new \Exception("Mysql Connection failed");
+    	
+
+    }
+
 	/**
 	 * Escapes an data for a query
 	 *
