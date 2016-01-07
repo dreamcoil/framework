@@ -9,7 +9,7 @@ class Random
 	public function int($maxLength)
 	{
 
-		is(is_int($maxLength))
+		if(is_int($maxLength))
 		{
 
 			return "CONSTRUCTION MODE";
