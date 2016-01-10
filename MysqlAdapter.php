@@ -126,6 +126,25 @@ class MysqlAdapter
     }
 
 	/**
+     * Runs multiple query and returns the result
+     *
+     * @param $querys
+     * @throws Exception
+     * @return $result
+     */
+    public function multi_query($querys)
+    {
+
+        $query = mysqli_multi_query($this->connection(), $querys);
+
+        $this->checkConnection();
+
+        return $query;
+
+    }
+
+
+	/**
      * @param bool $tableName
      * @return string
      */
