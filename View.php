@@ -47,6 +47,8 @@ class View
         if(!file_exists($returnView))
         {
 
+            $returnView = null;
+
             $dir = $path;
 
             $dir = explode('/', $dir);
@@ -79,6 +81,8 @@ class View
 
                     $cache['ReturnView'] = $cache['ReturnView'][count($cache['ReturnView']) - 1];
 
+                    var_dump($cache);
+
                     if ($cache['ReturnView'] == $cache['SelectView'])
                     {
 
@@ -97,8 +101,6 @@ class View
                 die('Can not find a file matching these arguments: getView("' . $this->getPath($path, TRUE) . '")');
 
             }
-
-            var_dump($returnView);
 
             return $returnView;
 
