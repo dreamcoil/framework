@@ -47,6 +47,8 @@ class View
         if(!file_exists($returnView))
         {
 
+            echo 'Tried at least';
+
             $dir = $path;
 
             $dir = explode('/', $dir);
