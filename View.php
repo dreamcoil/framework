@@ -47,8 +47,6 @@ class View
         if(!file_exists($returnView))
         {
 
-            echo 'Tried at least';
-
             $dir = $path;
 
             $dir = explode('/', $dir);
@@ -66,6 +64,8 @@ class View
                 {
 
                     $cache['SelectView'] = strrev($path);
+
+                    echo $path;
 
                     $cache['SelectView'] = explode("/", $cache['SelectView'])[0];
 
