@@ -65,8 +65,6 @@ class View
 
                     $cache['SelectView'] = strrev($path);
 
-                    echo $path;
-
                     $cache['SelectView'] = explode("/", $cache['SelectView'])[0];
 
                     $cache['SelectView'] = strrev($cache['SelectView']);
@@ -99,6 +97,8 @@ class View
                 die('Can not find a file matching these arguments: getView("' . $this->getPath($path, TRUE) . '")');
 
             }
+
+            var_dump($cache);
 
             return $returnView;
 
