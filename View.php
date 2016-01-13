@@ -98,7 +98,7 @@ class View
 
             }
 
-            var_dump($cache);
+            var_dump($returnView);
 
             return $returnView;
 
