@@ -84,7 +84,7 @@ class View
                     //Workaround: Windows file paths to unix file paths
                     $cache['ReturnView'] = str_replace("\\", "/", $cache['ReturnView']);
 
-                    $cache['ReturnView'] = explode("\\", $cache['ReturnView']);
+                    $cache['ReturnView'] = explode("/", $cache['ReturnView']);
 
                     $cache['ReturnView'] = $cache['ReturnView'][count($cache['ReturnView']) - 1];
 
