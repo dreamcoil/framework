@@ -65,21 +65,28 @@ class View
                 if (!$it->isDot())
                 {
 
+                    //Reverse requested file
                     $cache['SelectView'] = strrev($path);
 
+                    // Get the last entry
                     $cache['SelectView'] = explode("/", $cache['SelectView'])[0];
 
+                    //Reverse againg for getting it the right way round
                     $cache['SelectView'] = strrev($cache['SelectView']);
 
-                    $cache['ReturnView'] = explode(".", $it->key());
 
-                    //unset($cache['ReturnView'][count($cache['ReturnView']) - 1]);
+                    //Get current position and remove file ending
+                    $cache['ReturnView'] = explode(".", $it->key());
+                    unset($cache['ReturnView'][count($cache['ReturnView']) - 1]);
 
                     $cache['ReturnView'] = implode('.', $cache['ReturnView']);
 
+                    //Workaround: Windows file paths to unix file paths
+                    $cache['ReturnView'] = str_replace("\\", "/", $cache['ReturnView']);
+
                     $cache['ReturnView'] = explode("\\", $cache['ReturnView']);
 
-                    //$cache['ReturnView'] = $cache['ReturnView'][count($cache['ReturnView']) - 1];
+                    $cache['ReturnView'] = $cache['ReturnView'][count($cache['ReturnView']) - 1];
 
                     var_dump($cache);
 
