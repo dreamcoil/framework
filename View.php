@@ -84,8 +84,8 @@ class View
                     //Workaround: Windows file paths to unix file paths
                     $cache['ReturnView'] = str_replace("\\", "/", $cache['ReturnView']);
 
+                    //Gets the last element of the file path
                     $cache['ReturnView'] = explode("/", $cache['ReturnView']);
-
                     $cache['ReturnView'] = $cache['ReturnView'][count($cache['ReturnView']) - 1];
 
                     var_dump($cache);
