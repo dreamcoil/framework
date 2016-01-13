@@ -73,13 +73,13 @@ class View
 
                     $cache['ReturnView'] = explode(".", $it->key());
 
-                    unset($cache['ReturnView'][count($cache['ReturnView']) - 1]);
+                    //unset($cache['ReturnView'][count($cache['ReturnView']) - 1]);
 
                     $cache['ReturnView'] = implode('.', $cache['ReturnView']);
 
                     $cache['ReturnView'] = explode("\\", $cache['ReturnView']);
 
-                    $cache['ReturnView'] = $cache['ReturnView'][count($cache['ReturnView']) - 1];
+                    //$cache['ReturnView'] = $cache['ReturnView'][count($cache['ReturnView']) - 1];
 
                     var_dump($cache);
 
