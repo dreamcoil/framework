@@ -88,8 +88,6 @@ class View
                     $cache['ReturnView'] = explode("/", $cache['ReturnView']);
                     $cache['ReturnView'] = $cache['ReturnView'][count($cache['ReturnView']) - 1];
 
-                    var_dump($cache);
-
                     if ($cache['ReturnView'] == $cache['SelectView'])
                     {
 
