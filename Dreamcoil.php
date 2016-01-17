@@ -17,8 +17,6 @@ class Dreamcoil
 
 		if(ROUTE != '/' ) $route = str_replace(ROUTE, '', $_SERVER['REQUEST_URI']);
 
-		if(ROUTE == '/') $route = '';
-
 		$route = str_replace('//', '/', $route);
 
 		die($route . $url);
