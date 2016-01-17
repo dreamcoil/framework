@@ -5,6 +5,8 @@ namespace Dreamcoil;
 class Debug
 {
 	
+	private $known_level = ["[info]", "[Warn]", "[ERROR]"];
+	
 	/**
 	 * Adds an information to the debug console
 	 * 
@@ -15,12 +17,17 @@ class Debug
 	public function add($info, $level)
 	{
 		global $dreamcoil_debug;
-
-		if(is_string($info)) $dreamcoil_debug .= "\n " . $level . " " . date(DATE_RFC2822) . " : " . $info;
-
-		else throw new \Exception("The debug text must to be a string");
 		
+		if(in_array($level, $this->known_level))
+		{
 
+			if(is_string($info)) $dreamcoil_debug .= "\n " . $level . " " . date(DATE_RFC2822) . " : " . $info;
+	
+			else throw new \Exception("The debug text must to be a string");
+		
+		}
+		else throw new \Exception("This debug level is unknown: " . $level);
+		
 	}
 
 	/**
