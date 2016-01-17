@@ -19,7 +19,7 @@ class Dreamcoil
 
 		$path = $route . $url;
 
-		$path = str_replace('//', '/', $path);
+		for($i = 0;$i < 5; $i++) $path = str_replace('//', '/', $path);
 
 		if($full) return 'http://'  . $_SERVER['SERVER_NAME'] . $route . $url;
 
