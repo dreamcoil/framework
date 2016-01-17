@@ -19,7 +19,7 @@ class Dreamcoil
 
 		if(ROUTE == '/') $route = '';
 
-		var_dump($route);
+		var_dump(ROUTE);
 
 		$route = str_replace('//', '/', $route);
 
