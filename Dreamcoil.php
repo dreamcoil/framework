@@ -21,9 +21,9 @@ class Dreamcoil
 
 		for($i = 0;$i < 5; $i++) $path = str_replace('//', '/', $path);
 
-		if($full) return 'http://'  . $_SERVER['SERVER_NAME'] . $route . $url;
+		if($full) return 'http://'  . $_SERVER['SERVER_NAME'] . $path;
 
-		return $route . $url;
+		return $path;
 
 	}
 
