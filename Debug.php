@@ -5,7 +5,7 @@ namespace Dreamcoil;
 class Debug
 {
 	
-	private $known_level = ["[info]", "[Warn]", "[ERROR]"];
+	private $known_level = [LOG_INFO_TEXT, LOG_WARN_TEXT, LOG_ERROR_TEXT];
 	
 	/**
 	 * Adds an information to the debug console
