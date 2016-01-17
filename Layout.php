@@ -21,6 +21,8 @@ class Layout
 
         $this->data = $data;
 
+        $this->data['view'] = $this->view;
+
         $this->view->inc('layouts.' . $this->layout . '.head', $this->data);
 
     }
