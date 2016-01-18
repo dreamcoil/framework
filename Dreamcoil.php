@@ -56,5 +56,23 @@ class Dreamcoil
 		else throw new Exception("Only a array can be converted to an object");
 	
 	}
+
+	/**
+	 * Escapes German special character
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	public function escapeGerman($string)
+	{
+
+		$string = str_replace(
+		    		["Ä"     , "ä"     , "Ö"     ,  "ö"    , "Ü"     , "ü"     , "ß"] , 
+		    		["&Auml;", "&auml;", "&Ouml;", "&ouml;", "&Uuml;", "&uuml;", "&szlig;"] , 
+		    		$string);
+
+		return $string;
+
+	}
     
 }
