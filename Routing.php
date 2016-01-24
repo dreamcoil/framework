@@ -50,6 +50,8 @@ class Route
 
         header('Location: ' . $to);
 
+        die("<h1>You should be</h1><p>Target: <a href='" . $to . "'>" . $to . "</a></p>");
+
     }
 
     /**
