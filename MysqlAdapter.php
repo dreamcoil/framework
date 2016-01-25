@@ -38,10 +38,6 @@ class MysqlAdapter
 
         if(isset($opts['collect'])) $this->opts['collect'] = $opts['collect'];
 
-        $this->opts['charset'] = "utf8";
-
-        if(isset($opts['charset'])) $this->opts['charset'] = $opts['charset'];
-
         $this->unitTest = FALSE;
 
     }
@@ -88,8 +84,6 @@ class MysqlAdapter
             $this->password,
             $this->database,
             $this->port);
-
-        mysqli_set_charset($this->connection, $this->opts['charset']);
 
         $this->checkConnection();
 
