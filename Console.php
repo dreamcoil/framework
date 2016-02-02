@@ -15,7 +15,7 @@ class Console
     public function write($text, $color)
     {
         
-        echo "\n" . $this->format($text, $color);
+        echo $this->format($text, $color) . "\n";
         
     }
 
