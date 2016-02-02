@@ -11,7 +11,5 @@ class Console
         echo chr(27) . "$color" .  "$text" . chr(27) . "[0m";
         
     }
-    
-    }
 
 }
