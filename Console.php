@@ -5,10 +5,10 @@ namespace Dreamcoil;
 class Console
 {
 
-    public function write($text, $textColor)
+    public function write($text, $color)
     {
         
-        echo chr(27) . "$textColor" .  "$text" . chr(27) . "[0m";
+        echo chr(27) . "$color" .  "$text" . chr(27) . "[0m";
         
     }
     
