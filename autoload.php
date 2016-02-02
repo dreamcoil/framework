@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/Console.php';
+
 require __DIR__ . '/Constants.php';
 
 require __DIR__ . '/Config.php';
