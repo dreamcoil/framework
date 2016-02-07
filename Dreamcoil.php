@@ -17,10 +17,14 @@ class Dreamcoil
 		$request_uri = $_SERVER['REQUEST_URI'];
 		$request_uri = explode('?', $request_uri);
 		$request_uri = $request_uri[0];
+		
+		//Removes GET parameters from route
+		$better_route = explode('?', ROUTE);
+		$better_route = $better_route[0];
 
 		$route = $request_uri;
 
-		if(ROUTE != '/' ) $route = str_replace(ROUTE, '', $request_uri);
+		if(ROUTE != '/' ) $route = str_replace($better_route, '', $request_uri);
 
 		$path = $route . $url;
 
