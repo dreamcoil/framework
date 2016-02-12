@@ -5,6 +5,15 @@ namespace Dreamcoil;
 class Console
 {
 
+    private $options;
+
+    public function __construct(array $options)
+    {
+        
+        if($options['timestamp']) $this->options['timestamp'] = true;
+        
+    }
+
     public function format($text, $color)
     {
         
