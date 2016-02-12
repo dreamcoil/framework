@@ -25,7 +25,10 @@ class Console
     public function write($text, $color)
     {
         
-        echo $this->format($text, $color) . PHP_EOL;
+        if ($this->options['showTimetsamp']) $date = date(DATE_RFC2822) . " ";
+        else $date = "";
+        
+        echo $date . $this->format($text, $color) . PHP_EOL;
         
     }
 
