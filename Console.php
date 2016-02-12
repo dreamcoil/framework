@@ -11,7 +11,7 @@ class Console
     {
         
         if($options['showTimestamp']) $this->options['showTimestamp'] = true; 
-        else $this->options['showTimetsamp'] = false;
+        else $this->options['showTimestamp'] = false;
         
     }
 
@@ -25,7 +25,7 @@ class Console
     public function write($text, $color)
     {
         
-        if ($this->options['showTimetsamp']) $date = date(DATE_RFC2822) . " ";
+        if ($this->options['showTimestamp']) $date = date(DATE_RFC2822) . " ";
         else $date = "";
         
         echo $date . $this->format($text, $color) . PHP_EOL;
