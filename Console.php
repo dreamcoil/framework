@@ -10,7 +10,8 @@ class Console
     public function __construct(array $options)
     {
         
-        if($options['timestamp']) $this->options['timestamp'] = true; else $this->options['timetsamp'] = false;
+        if($options['showTimestamp']) $this->options['showTimestamp'] = true; 
+        else $this->options['showTimetsamp'] = false;
         
     }
 
