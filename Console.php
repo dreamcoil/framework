@@ -15,7 +15,7 @@ class Console
     public function write($text, $color)
     {
         
-        echo $this->format($text, $color) . "\n";
+        echo $this->format($text, $color) . PHP_EOL;
         
     }
 
