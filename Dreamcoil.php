@@ -83,5 +83,21 @@ class Dreamcoil
 		return $string;
 
 	}
+
+	/**
+	 * Makes json more beatifull
+	 *
+	 * @param string $jsonString
+	 * @return string
+	 */
+	public function beautifulJson($jsonString)
+	{
+		
+		return str_replace(
+			[","  ,"{"  ,"}"],
+			[",\n","{\n","\n}"],
+			$jsonString);
+		
+	}
     
 }
