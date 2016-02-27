@@ -32,8 +32,9 @@ class Dreamcoil
 
 		$protocol = 'https://';
 		if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') $protocol = 'http://';
+		if(is_null($full)) $protocol = '//';
 
-		if($full) return $protocol  . $_SERVER['SERVER_NAME'] . $path;
+		if($full || is_null($full)) return $protocol  . $_SERVER['SERVER_NAME'] . $path;
 
 		return $path;
 
