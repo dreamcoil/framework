@@ -30,7 +30,10 @@ class Dreamcoil
 
 		for($i = 0;$i < 5; $i++) $path = str_replace('//', '/', $path);
 
-		if($full) return 'http://'  . $_SERVER['SERVER_NAME'] . $path;
+		$protocol = 'https://';
+		if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') $protocol = 'http://';
+
+		if($full) return $protocol  . $_SERVER['SERVER_NAME'] . $path;
 
 		return $path;
 
