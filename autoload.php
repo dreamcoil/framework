@@ -31,3 +31,5 @@ require __DIR__ . '/Dreamcoil.php';
 require __DIR__ . '/Phase.php';
 
 require __DIR__ . '/Debug.php';
+
+require __DIR__ . '/Cron.php';
