@@ -86,6 +86,8 @@ class MysqlAdapter
             $this->port);
 
         $this->checkConnection();
+        
+        mysqli_set_charset($this->connection, "utf8");
 
     }
 
