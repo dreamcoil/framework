@@ -36,4 +36,4 @@ require __DIR__ . '/ErrorHandler.php'
 
 require __DIR__ . '/Cron.php';
 
-set_error_handler("DreancoilErrorHandler");
+set_error_handler("DreamcoilErrorHandler");
