@@ -32,4 +32,8 @@ require __DIR__ . '/Phase.php';
 
 require __DIR__ . '/Debug.php';
 
+require __DIR__ . '/ErrorHandler.php'
+
 require __DIR__ . '/Cron.php';
+
+set_error_handler("DreancoilErrorHandler");
