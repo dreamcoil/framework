@@ -90,10 +90,8 @@ class MysqlAdapter
             $this->password,
             $this->database,
             $this->port);
-
-        $this->checkConnection();
         
-        mysqli_set_charset($this->connection, "utf8");
+        if($this->checkConnection()) mysqli_set_charset($this->connection, "utf8");
 
     }
 
