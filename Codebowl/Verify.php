@@ -65,6 +65,11 @@ class Verify
 		return false;
 
 	}
+	
+	public function date($string)
+	{
+		return strtotime($string);
+	}
 
 	public function statement($statement)
 	{
