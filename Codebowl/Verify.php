@@ -68,6 +68,9 @@ class Verify
 	
 	public function date($string)
 	{
+		
+		if($string == "") return true;
+		
 		return strtotime($string);
 	}
 
