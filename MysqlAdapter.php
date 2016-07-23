@@ -226,7 +226,7 @@ class MysqlAdapter
 
             $rows[$i] = "`" . $row . "`";
 
-            if ($content == NULL) $values[$i] = "NULL";
+            if ($content == NULL && $content != "") $values[$i] = "NULL";
             else $values[$i] = "'" . $this->webEscape($content) . "'";
 
             $i++;
