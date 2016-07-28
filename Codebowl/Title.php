@@ -89,7 +89,7 @@ class Title
     public function length($set = false)
     {
         
-        if($set) = $this->length = $set;
+        if($set) $this->length = $set;
         
         return $set;
         
