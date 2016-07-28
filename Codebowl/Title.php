@@ -5,7 +5,7 @@ namespace Dreamcoil\Codebowl;
 
 class Title
 {
-    private $title, $append, $prepend;
+    private $title, $append, $prepend, $length = null;
     public $prefix, $suffix;
 
     /**
@@ -79,6 +79,20 @@ class Title
 
         $this->prepend = $prepend;
 
+    }
+    
+    /**
+     * get and set max length for titles
+     * 
+     * @param $set
+     */
+    public function length($set = false)
+    {
+        
+        if($set) = $this->length = $set;
+        
+        return $set;
+        
     }
 
 }
