@@ -85,6 +85,7 @@ class Title
      * get and set max length for titles
      * 
      * @param $set
+     * @return int
      */
     public function length($set = false)
     {
