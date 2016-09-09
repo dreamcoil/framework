@@ -15,7 +15,7 @@ class Route
      *
      * @return string/array
      */
-    public function get($params = false)
+    public static function get($params = false)
     {
 
         $explode = explode('?', ROUTE);
@@ -45,7 +45,7 @@ class Route
      *
      * @param $to
      */
-    public function set($to)
+    public static function set($to)
     {
 
         header('Location: ' . $to);
