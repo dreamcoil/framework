@@ -10,7 +10,7 @@ class Dreamcoil
 	 * @param bool|false $full decides if you want a relative or absolute URL
 	 * @return string
 	 */
-	public function url($url, $full = false)
+	public static function url($url, $full = false)
 	{
 
 		//Removes all GET parameters from request uri	
@@ -47,7 +47,7 @@ class Dreamcoil
 	 * @param null $lang
 	 * @return null
 	 */
-	public function __($key, $lang = null)
+	public static function __($key, $lang = null)
 	{
 
 		\Dreamcoil\Translate::say($key, $lang);
@@ -61,7 +61,7 @@ class Dreamcoil
 	 * @param array $array
 	 * @return object
 	 */
-	public function toObject(array $array)
+	public static function toObject(array $array)
 	{
 
 		if(is_array($array)) return json_decode(json_encode($array));
@@ -76,7 +76,7 @@ class Dreamcoil
 	 * @param string $string
 	 * @return string
 	 */
-	public function escapeGerman($string)
+	public static function escapeGerman($string)
 	{
 
 		$string = str_replace(
@@ -94,7 +94,7 @@ class Dreamcoil
 	 * @param string $jsonString
 	 * @return string
 	 */
-	public function beautifulJson($jsonString)
+	public static function beautifulJson($jsonString)
 	{
 		
 		return str_replace(
@@ -109,7 +109,7 @@ class Dreamcoil
 	 * 
 	 * @return bool
 	 */
-	public function isBot()
+	public static function isBot()
 	{
 		return isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT']);
 	}
