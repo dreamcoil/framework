@@ -116,13 +116,15 @@ class MysqlAdapter
      */
     public function query($query)
     {
-
+		global $dreamcoilMysqliQueries;
+		if(!isset($dreamcoilMysqliQueries)) $dreamcoilMysqliQueries = 1;
+		else $dreamcoilMysqliQueries++;
+			
         $query = mysqli_query($this->connection(), $query);
 
         $this->checkConnection();
 
         return $query;
-
     }
 
 	/**
@@ -285,6 +287,11 @@ class MysqlAdapter
 
     }
 
-
+	public static function getQueryCount() 
+	{
+		global $dreamcoilMysqliQueries;
+		if(isset($dreamcoilMysqliQueries)) return $dreamcoilMysqliQueries;
+		else return 0;
+	}
 
 }
