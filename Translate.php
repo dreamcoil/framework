@@ -77,11 +77,8 @@ class Translate
      */
     public function say($key, $lang = null)
     {
-
         echo Translate::get($key, $lang);
-
         return null;
-
     }
 
 }
