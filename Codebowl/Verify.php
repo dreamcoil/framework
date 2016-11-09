@@ -5,7 +5,7 @@ namespace Dreamcoil\Codebowl;
 class Verify
 {
 
-	public function email($email)
+	public static function email($email)
 	{
 
 		if(filter_var($email, FILTER_VALIDATE_EMAIL) !== false) return true;
@@ -14,7 +14,7 @@ class Verify
 
 	}
 
-	public function password($password, $length = 6, $strength = 0)
+	public static function password($password, $length = 6, $strength = 0)
 	{
 
 		if(strlen($password) >= $length)
@@ -48,7 +48,7 @@ class Verify
 
 	}
 
-	public function name($name)
+	public static function name($name)
 	{
 
 		if(preg_match("/((\b[A-Z,ü,ö,ä]{1}[a-z,ü,ö,ä]{2,}).){2,}/", $name)) return true;
@@ -57,7 +57,7 @@ class Verify
 
 	}
 
-	public function timestamp($timestamp)
+	public static function timestamp($timestamp)
 	{
 
 		if($timestamp <= time() && $timestamp > time() / 2 && is_numeric($timestamp)) return true;
@@ -66,7 +66,7 @@ class Verify
 
 	}
 	
-	public function date($string)
+	public static function date($string)
 	{
 		
 		if($string == "") return true;
@@ -74,7 +74,7 @@ class Verify
 		return strtotime($string);
 	}
 
-	public function statement($statement)
+	public static function statement($statement)
 	{
 
 		if($statement == "yes" || $statement == "no") return true;
