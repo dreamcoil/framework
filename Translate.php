@@ -30,7 +30,7 @@ class Translate
      * @param null $lang
      * @return string
      */
-    public function get($key, $lang = null)
+    public static function get($key, $lang = null)
     {
 
         $config = new \Dreamcoil\Config;
