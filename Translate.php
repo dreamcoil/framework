@@ -75,7 +75,7 @@ class Translate
      * @param null $lang
      * @return null
      */
-    public function say($key, $lang = null)
+    public static function say($key, $lang = null)
     {
         echo Translate::get($key, $lang);
         return null;
