@@ -12,7 +12,7 @@ class Debug
 	 * @param string $level
 	 * @throw exception
 	 */
-	public function add($info, $level)
+	public static function add($info, $level)
 	{
 		global $dreamcoil_debug;
 		
@@ -27,7 +27,7 @@ class Debug
 	 *
 	 * @return string
 	 */
-	public function get($html = false)
+	public static function get($html = false)
 	{
 		global $dreamcoil_debug;
 
