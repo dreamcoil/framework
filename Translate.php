@@ -27,7 +27,7 @@ class Translate
     public static function getLang()
     {
     	if(isset($_COOKIE['lang'])) return $_COOKIE['lang'];
-    	else null;
+    	else return null;
     }
 
     public static function destroyLang()
