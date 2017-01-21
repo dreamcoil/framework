@@ -38,7 +38,7 @@ class Translate
     /**
      * Gets the translation for a translation key
      *
-     * @param array $key
+     * @param $key
      * @return string
      */
     public static function get($key)
