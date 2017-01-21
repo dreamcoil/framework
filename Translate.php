@@ -4,75 +4,68 @@ namespace Dreamcoil;
 
 class Translate
 {
-	const COOKIE_NAME = 'lang';
-
-    public static function setUpCache()
-    {
-    	global $dreamcoil_translate_cache;
-        if(!isset($dreamcoil_translate_cache)) $dreamcoil_translate_cache = [];
-    }
+    private $lang;
 
     /**
      * Sets the language
      *
      * @param $lang
      */
-    public static function setLang($lang)
+    public function setLang($lang)
     {
         global $console;
-        setcookie(Translate::COOKIE_NAME, $lang, time() * 2);
+
+        $this->lang = $lang;
+
+        if(isset($console)) setcookie('lang', $lang, time() * 2);
+        
         return true;
-    }
 
-    public static function getLang()
-    {
-    	if(isset($_COOKIE['lang'])) return $_COOKIE['lang'];
-    	else null;
-    }
-
-    public static function destroyLang()
-    {
-        setcookie(Translate::COOKIE_NAME, '0', time()-ONE_WEEK);
     }
 
     /**
      * Gets the translation for a translation key
      *
-     * @param array $key
+     * @param $key
+     * @param null $lang
      * @return string
      */
-    public static function get($key)
+    public static function get($key, $lang = null)
     {
+
         $config = new \Dreamcoil\Config;
+
         $key = explode('.',$key);
-        $lang = Translate::getLang();
 
-        if (null === $lang) $lang = $config->get('fallback_lang');
+        $fallback = $config->get('fallback_lang');
 
-        $file = Translate::lookUpFile($lang, $key[0]);
+        if($lang === null)
+        {
 
-        if (isset($file[$key[1]])) return str_replace(
-            ['ü',     'ö',     'ä',     'Ü',     'Ö',     'Ä',     'ß'], 
-            ['&uuml;','&ouml;','&auml;','&Uuml;','&Ouml;','&Auml;','&szlig;'], 
-            $file[$key[1]]
-        );
+            if(!file_exists( __DIR__ . '/../files/Translations/' . $fallback . '/'. $key[0] . '.php'))
+                return implode('.', $key);
 
-        return implode('.', $key);
-    }
+            $lang = include __DIR__ . '/../files/Translations/' . $fallback . '/'. $key[0] . '.php';
 
-    public static function lookUpFile($lang, $file)
-    {
-    	global $dreamcoil_translate_cache;
-    	
-        Translate::setUpCache();
-        if (!isset($dreamcoil_translate_cache[$lang])) $dreamcoil_translate_cache[$lang] = [];
-        if (!isset($dreamcoil_translate_cache[$lang][$file])) {
-        	$file_path =  __DIR__ . '/../files/Translations/' . $lang . '/'. $file . '.php';
-        	if (!file_exists($file_path)) $dreamcoil_translate_cache[$lang][$file] = [];
-        	else $dreamcoil_translate_cache[$lang][$file] = include $file_path;
+            if(isset($lang[$key[1]])) return $lang[$key[1]];
+
+            return implode('.', $key);
+
         }
 
-        return $dreamcoil_translate_cache[$lang][$file];
+        if(!file_exists( __DIR__ . '/../files/Translations/' . $lang . '/'. $key[0] . '.php'))
+            return implode('.', $key);
+
+        $lang = include __DIR__ . '/../files/Translations/' . $lang . '/'. $key[0] . '.php';
+
+        if(isset($lang[$key[1]])) return str_replace(
+            ['ü',     'ö',     'ä',     'Ü',     'Ö',     'Ä',     'ß'], 
+            ['&uuml;','&ouml;','&auml;','&Uuml;','&Ouml;','&Auml;','&szlig;'], 
+            $lang[$key[1]]
+            );
+
+        return implode('.', $key);
+
     }
 
     /**
