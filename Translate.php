@@ -67,7 +67,7 @@ class Translate
         Translate::setUpCache();
         if (!isset($dreamcoil_translate_cache[$lang])) $dreamcoil_translate_cache[$lang] = [];
         if (!isset($dreamcoil_translate_cache[$lang][$file])) {
-        	$file_path =  __DIR__ . '/../files/Translations/' . $lang . '/'. $key[0] . '.php';
+        	$file_path =  __DIR__ . '/../files/Translations/' . $lang . '/'. $file . '.php';
         	if (!file_exists($file_path)) $dreamcoil_translate_cache[$lang][$file] = [];
         	else $dreamcoil_translate_cache[$lang][$file] = include $file_path;
         }
