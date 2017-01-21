@@ -38,14 +38,14 @@ class Translate
     /**
      * Gets the translation for a translation key
      *
-     * @param $key
-     * @param null $lang
+     * @param array $key
      * @return string
      */
-    public static function get($key, $lang = Translate::getLang())
+    public static function get($key)
     {
         $config = new \Dreamcoil\Config;
         $key = explode('.',$key);
+        $lang = Translate::getLang();
 
         if (null === $lang) $lang = $config->get('fallback_lang');
 
