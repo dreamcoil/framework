@@ -54,7 +54,7 @@ class Translate
         if (isset($file[$key[1]])) return str_replace(
             ['ü',     'ö',     'ä',     'Ü',     'Ö',     'Ä',     'ß'], 
             ['&uuml;','&ouml;','&auml;','&Uuml;','&Ouml;','&Auml;','&szlig;'], 
-            $lang[$key[1]]
+            $file[$key[1]]
         );
 
         return implode('.', $key);
