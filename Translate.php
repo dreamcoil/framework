@@ -38,10 +38,11 @@ class Translate
     /**
      * Gets the translation for a translation key
      *
-     * @param array $key
+     * @param string $key
+     * @param array $placeholders
      * @return string
      */
-    public static function get($key)
+    public static function get($key, $placeholders = [])
     {
         $config = new \Dreamcoil\Config;
         $key = explode('.',$key);
@@ -51,11 +52,21 @@ class Translate
 
         $file = Translate::lookUpFile($lang, $key[0]);
 
-        if (isset($file[$key[1]])) return str_replace(
-            ['ü',     'ö',     'ä',     'Ü',     'Ö',     'Ä',     'ß'], 
-            ['&uuml;','&ouml;','&auml;','&Uuml;','&Ouml;','&Auml;','&szlig;'], 
-            $file[$key[1]]
-        );
+        if (isset($file[$key[1]])) {
+        	$result = str_replace(
+	            ['ü',     'ö',     'ä',     'Ü',     'Ö',     'Ä',     'ß'], 
+	            ['&uuml;','&ouml;','&auml;','&Uuml;','&Ouml;','&Auml;','&szlig;'], 
+	            $file[$key[1]]
+	        );
+
+        	foreach($placeholders as $name => $value)
+        	{
+        		$name = strtolower($name);
+        		$result = str_replace("%".$name."%", $value, $result);
+        	}
+
+        	return $result;
+        }
 
         return implode('.', $key);
     }
