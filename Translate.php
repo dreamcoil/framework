@@ -93,9 +93,9 @@ class Translate
      * @param null $lang
      * @return null
      */
-    public static function say($key, $lang = null)
+    public static function say($key, $placeholders = [])
     {
-        echo Translate::get($key, $lang);
+        echo Translate::get($key, $placeholders = []);
         return null;
     }
 
