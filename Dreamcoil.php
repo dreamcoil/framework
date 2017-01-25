@@ -47,13 +47,10 @@ class Dreamcoil
 	 * @param null $lang
 	 * @return null
 	 */
-	public static function __($key, $lang = null)
+	public static function __($key, $placeholders = [])
 	{
-
-		\Dreamcoil\Translate::say($key, $lang);
-
+		\Dreamcoil\Translate::say($key, $placeholders);
 		return null;
-
 	}
 
 	/**
