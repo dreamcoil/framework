@@ -305,7 +305,7 @@ class MysqlAdapter
 			"password" =>  $this->password,
 			"database" =>  $this->database
 		];
-		return $red;
+		return $cred;
 	}
 
 }
