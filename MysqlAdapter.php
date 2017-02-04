@@ -293,5 +293,19 @@ class MysqlAdapter
 		if(isset($dreamcoilMysqliQueries)) return $dreamcoilMysqliQueries;
 		else return 0;
 	}
+	
+	/**
+	 * @return array
+	 */
+	public function getCredentials()
+	{
+		$cred = [
+			"host" => $this->host,
+			"user" => $this->user,
+			"password" =>  $this->password,
+			"database" =>  $this->database
+		];
+		return $red;
+	}
 
 }
