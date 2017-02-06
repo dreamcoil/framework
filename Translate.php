@@ -95,7 +95,7 @@ class Translate
      */
     public static function say($key, $placeholders = [])
     {
-        echo Translate::get($key, $placeholders = []);
+        echo Translate::get($key, $placeholders);
         return null;
     }
 
