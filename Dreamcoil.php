@@ -40,24 +40,22 @@ class Dreamcoil
 
 	}
 
-	/**
-	 * Echos a translation for given translation key
-	 *
-	 * @param $key
-	 * @param null $lang
-	 * @return null
-	 */
+    /**
+     * @param $key
+     * @param array $placeholders
+     * @return null
+     */
 	public static function __($key, $placeholders = [])
 	{
 		\Dreamcoil\Translate::say($key, $placeholders);
 		return null;
 	}
 
-	/**
-	 * Returns an object
-	 * @param array $array
-	 * @return object
-	 */
+    /**
+     * @param array $array
+     * @return mixed
+     * @throws Exception
+     */
 	public static function toObject(array $array)
 	{
 
