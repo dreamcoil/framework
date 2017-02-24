@@ -95,7 +95,7 @@ class MysqlAdapter
     /**
      * Returns the current connection
      *
-     * @return $this->connection;
+     * @return \mysqli
      */
     public function connection()
     {
