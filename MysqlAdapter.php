@@ -10,13 +10,16 @@ class MysqlAdapter
     private $database;
     private $port;
     private $unitTest;
+	/**
+	 * @var \mysqli
+	 */
     private $connection;
     private $table;
     private $opts;
     private $collectData;
 	
 	/**
-	 * Creates a Mysql Connection
+ 	 * Creates a Mysql Connection
      *
      * @param $host
      * @param $user
@@ -49,23 +52,17 @@ class MysqlAdapter
      */
     public function checkConnection()
     {
-
-		if(is_bool($this->connection)) {
-			
+		if(is_bool($this->connection) || is_null($this->connection)) {
 			return false;
-			
 		}
 
         if (mysqli_error($this->connection())) {
-
             throw new \Exception(mysqli_error($this->connection()));
 
             return false;
-
         }
 
         return true;
-
     }
 
     /**
@@ -102,9 +99,7 @@ class MysqlAdapter
      */
     public function connection()
     {
-
         return $this->connection;
-
     }
 
 	/**
