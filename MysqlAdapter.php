@@ -58,8 +58,6 @@ class MysqlAdapter
 
         if (mysqli_error($this->connection())) {
             throw new \Exception(mysqli_error($this->connection()));
-
-            return false;
         }
 
         return true;
