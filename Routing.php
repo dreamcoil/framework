@@ -17,13 +17,10 @@ class Route
      */
     public static function get($params = false)
     {
-
         $explode = explode('?', ROUTE);
-
         if($params) return $explode;
 
         return $explode[0];
-
     }
 
     /**
@@ -33,11 +30,8 @@ class Route
      */
     public function getArgs()
     {
-
         $return = explode('/',$this->get());
-
         return $return;
-
     }
 
     /**
@@ -47,11 +41,8 @@ class Route
      */
     public static function set($to)
     {
-
         header('Location: ' . $to);
-
         die("<h1>You should be</h1><p>Target: <a href='" . $to . "'>" . $to . "</a></p>");
-
     }
 
     /**
@@ -64,88 +55,61 @@ class Route
     {
         global $show404;
 
-        if(isset($this->group)) $route = '/' . $this->group . '/' . $route;
+        if(isset($this->group))  {
+            $route = '/' . $this->group . '/' . $route;
+        }
 
         if(preg_match_all("/{?[a-zA-Z0-9_]{1,}}/", $route, $variables))
         {
-
             $argv = explode('/',$route);
-
             $args = $this->getArgs();
 
             if(count($argv) == count($args))
             {
-
                 $i = 0;
-
+                $return = [];
                 foreach($argv as $var)
                 {
 
                     if($var == $args[$i])
                     {
-
                         $return[$i] = true;
-
-                    }
-                    else
-                    {
-
+                    } else {
                         if(strpos($var,'{') !== false)
                         {
-
                             $return[$i] = true;
-
-                            $var_name = str_replace(array('{','}'),array('',''), $var);
-
+                            $var_name = str_replace(array('{','}'),'', $var);
                             $data[$var_name] = $args[$i];
-
-                        }
-                        else
-                        {
-
+                        } else {
                             $return[$i] = false;
-
                         }
-
                     }
 
-
                     $i++;
-
                 }
 
-
-                if(in_array(false, $return))
+                if(in_array(false, $return)) {
                     return false;
-
-                else
-                {
-
+                } else {
                     $this->data = $data;
-
                     $show404 = false;
 
                     return true;
-
                 }
 
-            }
-            else
+            } else {
                 return false;
+            }
 
         }
 
         if($this->get() == $route)
-        { 
-
+        {
             $show404 = false;
-
             return true;
-
         }
 
         return false;
-
     }
 
     /**
@@ -156,18 +120,13 @@ class Route
      */
     public function group($group)
     {
-
         if($this->getArgs()[1] == $group)
         {
-
             $this->group = $group;
-
             return true;
-
         }
 
         return false;
-
     }
 
 
@@ -180,7 +139,7 @@ class Route
     public function getError()
     {
         global $show404;
-
+        return 200;
         if($show404 === null) return 404;
 
     }
