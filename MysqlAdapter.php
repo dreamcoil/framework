@@ -69,8 +69,8 @@ class MysqlAdapter
 			return false;
 		}
 
-        if ($this->getInterface()->error) {
-            throw new \Exception($this->getInterface()->error);
+        if (null !== $this->getInterface()->connect_error) {
+            throw new \Exception($this->getInterface()->connect_errno." (".$this->getInterface()->connect_errno.")");
         }
 
         return true;
