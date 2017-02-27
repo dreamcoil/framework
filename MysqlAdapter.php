@@ -144,7 +144,15 @@ class MysqlAdapter
      */
     public function fetch_array(\mysqli_result $result)
     {
-        return $result->fetch_array();
+        $i = 0;
+        $return = [];
+        while($data = $this->fetch($result))
+        {
+          		$return[$i] = $data;
+            	$i++;
+        }
+
+     	return $return;
     }
 
     /**
