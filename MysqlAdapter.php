@@ -96,8 +96,10 @@ class MysqlAdapter
     public function query($query)
     {
 		global $dreamcoilMysqliQueries;
-		if(!isset($dreamcoilMysqliQueries)) $dreamcoilMysqliQueries = 1;
-		else $dreamcoilMysqliQueries++;
+		if(!isset($dreamcoilMysqliQueries)) {
+		    $dreamcoilMysqliQueries = [];
+        }
+        $dreamcoilMysqliQueries[] = $query;
 
         $this->checkConnection();
 
@@ -259,13 +261,13 @@ class MysqlAdapter
         return [$array1, $array2];
     }
 
-	public static function getQueryCount() 
+	public static function getExecutedQuerys()
 	{
 		global $dreamcoilMysqliQueries;
 		if(isset($dreamcoilMysqliQueries)) {
 		    return $dreamcoilMysqliQueries;
         }
-        return 0;
+        return [];
 	}
 	
 	/**
