@@ -144,7 +144,7 @@ class MysqlAdapter
      */
     public function fetch_array(\mysqli_result $result)
     {
-        return $result->fetch_assoc();
+        return $result->fetch_array();
     }
 
     /**
@@ -155,7 +155,7 @@ class MysqlAdapter
      */
     public function fetch(\mysqli_result $result)
     {
-        return $this->fetch_array($result);
+        return $result->fetch_assoc();
     }
 
     /**
