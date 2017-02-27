@@ -51,7 +51,7 @@ class MysqlAdapter
      */
     public function connect()
     {
-        $this->interface = new \mysqli($this->host, $this->user, $this->database, $this->port);
+        $this->interface = new \mysqli($this->host, $this->user, $this->password, $this->database, $this->port);
 
         if($this->checkConnection())  {
             $this->interface->set_charset("utf8");
