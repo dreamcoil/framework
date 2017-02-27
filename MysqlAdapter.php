@@ -10,10 +10,6 @@ class MysqlAdapter
     private $database;
     private $port;
     private $unitTest;
-	/**
-	 * @var \mysqli
-	 */
-    private $connection;
 
     /**
      * @var \mysqli
