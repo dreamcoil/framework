@@ -70,7 +70,7 @@ class MysqlAdapter
 		}
 
         if (null !== $this->getInterface()->connect_error) {
-            throw new \Exception($this->getInterface()->connect_errno." (".$this->getInterface()->connect_errno.")");
+            throw new \Dreamcoil\Exception\MysqlAdapter($this->getInterface()->connect_errno." (".$this->getInterface()->connect_errno.")");
         }
 
         return true;
@@ -222,7 +222,7 @@ class MysqlAdapter
 		{
             return $this->getInterface()->stat();
     	}
-    	else throw new \Exception("Mysql Connection failed");
+    	else throw new \Dreamcoil\Exception\MysqlAdapter("Mysql Connection failed");
     }
 
 	/**
