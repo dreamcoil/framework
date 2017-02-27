@@ -14,6 +14,11 @@ class MysqlAdapter
 	 * @var \mysqli
 	 */
     private $connection;
+
+    /**
+     * @var \mysqli
+     */
+    private $interface=null;
     private $table;
     private $opts;
     private $collectData;
@@ -39,25 +44,37 @@ class MysqlAdapter
         $this->database = $database;
         $this->port = $port;
 
-        if(isset($opts['collect'])) $this->opts['collect'] = $opts['collect'];
+        $this->opts = array_merge($this->opts, $opts);
 
         $this->unitTest = FALSE;
 
     }
 
     /**
+     * Creates the connection
+     */
+    public function connect()
+    {
+        $this->interface = new \mysqli($this->host, $this->user, $this->database, $this->port);
+
+        if($this->checkConnection())  {
+            $this->interface->set_charset("utf8");
+        }
+    }
+
+    /**
      * Checks if the connection is still alive
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function checkConnection()
     {
-		if(is_bool($this->connection) || is_null($this->connection)) {
+		if(is_bool($this->getInterface()) || is_null($this->getInterface())) {
 			return false;
 		}
 
-        if (mysqli_error($this->connection())) {
-            throw new \Exception(mysqli_error($this->connection()));
+        if ($this->getInterface()->error) {
+            throw new \Exception($this->getInterface()->error);
         }
 
         return true;
@@ -68,43 +85,16 @@ class MysqlAdapter
      */
     public function __destruct()
     {
-
-        if ($this->opts['collect']) $this->query($this->collectData);
-
-    }
-
-    /**
-     * Creates the connection 
-     */
-    public function connect()
-    {
-
-        $this->connection = mysqli_connect(
-            $this->host,
-            $this->user,
-            $this->password,
-            $this->database,
-            $this->port);
-        
-        if($this->checkConnection()) mysqli_set_charset($this->connection, "utf8");
-
-    }
-
-    /**
-     * Returns the current connection
-     *
-     * @return \mysqli
-     */
-    public function connection()
-    {
-        return $this->connection;
+        if ($this->opts['collect']) {
+            $this->query($this->collectData);
+        }
     }
 
 	/**
      * Runs a query and returns the result
      *
      * @param $query
-     * @throws Exception
+     * @throws \Exception
      * @return $result
      */
     public function query($query)
@@ -112,8 +102,8 @@ class MysqlAdapter
 		global $dreamcoilMysqliQueries;
 		if(!isset($dreamcoilMysqliQueries)) $dreamcoilMysqliQueries = 1;
 		else $dreamcoilMysqliQueries++;
-			
-        $query = mysqli_query($this->connection(), $query);
+
+		$this->getInterface()->query($query);
 
         $this->checkConnection();
 
@@ -124,18 +114,16 @@ class MysqlAdapter
      * Runs multiple query and returns the result
      *
      * @param $querys
-     * @throws Exception
+     * @throws \Exception
      * @return $result
      */
     public function multi_query($querys)
     {
-
-        $query = mysqli_multi_query($this->connection(), $querys);
+        $this->getInterface()->multi_query($querys);
 
         $this->checkConnection();
 
-        return $query;
-
+        return $querys;
     }
 
 
@@ -145,24 +133,11 @@ class MysqlAdapter
      */
     public function table($tableName = FALSE)
     {
+        if($tableName) {
+            $this->table = $tableName;
+        }
 
-        if(!$tableName) return $this->table;
-
-        $this->table = $tableName;
-
-    }
-
-    /**
-     * Fetches the data from a query
-     *
-     * @param $result   
-     * @return array
-     */
-    public function fetch($result)
-    {
-
-        return mysqli_fetch_assoc($result);
-
+        return $this->table;
     }
 
 
@@ -172,34 +147,20 @@ class MysqlAdapter
      * @param $result   
      * @return array
      */
-    public function fetch_array($result)
+    public function fetch_array(\mysqli_result $result)
     {
-
-    	$i = 0;
-
-    	$return = [];
-
-    	while($data = $this->fetch($result))
-    	{
-
-    		$return[$i] = $data;
-
-    		$i++;
-
-    	}
-
-    	return $return;
-
+        return $result->fetch_assoc();
     }
 
     /**
-     * @param $var
+     * Fetches the data from a query
+     *
+     * @param \mysqli_result $result
+     * @return array
      */
-    public function debug($var)
+    public function fetch(\mysqli_result $result)
     {
-
-        var_dump($var);
-
+        return $this->fetch_array($result);
     }
 
     /**
@@ -209,23 +170,28 @@ class MysqlAdapter
      */
     public function insert(array $data, $table = FALSE)
     {
+        if ($table !== FALSE) {
+            $this->table = $table;
+        }
 
-        if ($table !== FALSE) $this->table = $table;
-
-
-        if ($this->opts['collect']) echo NULL;
+        if ($this->opts['collect']) {
+            echo NULL;
+        }
 
         $i = 0;
-
+        $rows = $values = [];
         foreach ($data as $row => $content) {
 
             $rows[$i] = "`" . $row . "`";
 
-            if ($content == NULL && $content != "") $values[$i] = "NULL";
-            else $values[$i] = "'" . $this->webEscape($content) . "'";
+            if ($content == NULL && $content != "") {
+                $values[$i] = "NULL";
+            }
+            else {
+                $values[$i] = "'" . $this->webEscape($content) . "'";
+            }
 
             $i++;
-
         }
 
         $query = "INSERT INTO `" . $this->database . "`.`" . $this->table . "` ";
@@ -234,57 +200,69 @@ class MysqlAdapter
 
         $query .= "VALUES (" . implode(', ', $values) . ");";
 
-        if($this->unitTest) return $query;
+        if($this->unitTest) {
+            return $query;
+        }
 
-        if (!$this->opts['collect']) $this->query($query);
-        else $this->collectData .= "\n" . $query;
+        if (!$this->opts['collect']) {
+            $this->query($query);
+        }
+        else {
+            $this->collectData .= "\n" . $query;
+        }
 
         return NULL;
-
     }
 
     /**
      * Get stats about the Mysql Server
      *
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     public function stat()
     {
-
 		if($this->checkConnection())
 		{
-
-    		return mysqli_stat($this->connection);
-
+            return $this->getInterface()->stat();
     	}
     	else throw new \Exception("Mysql Connection failed");
-
     }
 
 	/**
 	 * Escapes an data for a query
 	 *
      * @param string $data
+     * @param bool $reverse
      * @return string
      */
-    public function webEscape($data)
+    public function webEscape($data, $reverse = false)
     {
-
-    	$data = str_replace(
-    		["<",    ">",    "'"    , "Ä"     , "ä"     , "Ö"     ,  "ö"    , "Ü"     , "ü"     ] , 
-    		["&lt;", "&gt;", "&#39;", "&Auml;", "&auml;", "&Ouml;", "&ouml;", "&Uuml;", "&uuml;"] , 
-    		$data);
-
+    	$data = str_replace($this->webEscapeCharacters($reverse)[0], $this->webEscapeCharacters($reverse)[1], $data);
     	return $data;
+    }
 
+    /**
+     * @param bool $reverse
+     * @return array
+     */
+    private function webEscapeCharacters($reverse = false) {
+        $array1 = ["<",    ">",    "'"    , "Ä"     , "ä"     , "Ö"     ,  "ö"    , "Ü"     , "ü"     ];
+        $array2 = ["&lt;", "&gt;", "&#39;", "&Auml;", "&auml;", "&Ouml;", "&ouml;", "&Uuml;", "&uuml;"];
+
+        if($reverse) {
+            return [$array2, $array1];
+        }
+        return [$array1, $array2];
     }
 
 	public static function getQueryCount() 
 	{
 		global $dreamcoilMysqliQueries;
-		if(isset($dreamcoilMysqliQueries)) return $dreamcoilMysqliQueries;
-		else return 0;
+		if(isset($dreamcoilMysqliQueries)) {
+		    return $dreamcoilMysqliQueries;
+        }
+        return 0;
 	}
 	
 	/**
@@ -300,5 +278,13 @@ class MysqlAdapter
 		];
 		return $cred;
 	}
+
+    /**
+     * @return \mysqli
+     */
+    public function getInterface()
+    {
+        return $this->interface;
+    }
 
 }

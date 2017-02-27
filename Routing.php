@@ -139,9 +139,9 @@ class Route
     public function getError()
     {
         global $show404;
-        return 200;
-        if($show404 === null) return 404;
 
+        if($show404) return 404;
+        return 200;
     }
 
 }
