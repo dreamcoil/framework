@@ -99,11 +99,10 @@ class MysqlAdapter
 		if(!isset($dreamcoilMysqliQueries)) $dreamcoilMysqliQueries = 1;
 		else $dreamcoilMysqliQueries++;
 
-		$this->getInterface()->query($query);
-
         $this->checkConnection();
 
-        return $query;
+		$result = $this->getInterface()->query($query);
+        return $result;
     }
 
 	/**
