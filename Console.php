@@ -15,14 +15,14 @@ class Console
         
     }
 
-    public function format($text, $color)
+    public function format($text, $color = CONSOLE_TEXT_WHITE)
     {
         
         return chr(27) . "$color" .  "$text" . chr(27) . "[0m";
         
     }
 
-    public function write($text, $color)
+    public function write($text, $color = CONSOLE_TEXT_WHITE)
     {
         
         if ($this->options['showTimestamp']) $date = date(DATE_RFC2822) . " ";
