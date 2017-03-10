@@ -223,7 +223,7 @@ class MysqlAdapter
      * @param null $where
      * @return null|string
      */
-    public function update($fields, $table, $where = null)
+    public function update(array $fields, $table = FALSE, $where = NULL)
     {
         if ($table !== FALSE) {
             $this->table = $table;
