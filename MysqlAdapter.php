@@ -191,8 +191,7 @@ class MysqlAdapter
 
             if ($content == NULL && $content != "") {
                 $values[$i] = "NULL";
-            }
-            else {
+            } else {
                 $values[$i] = "'" . $this->webEscape($content) . "'";
             }
 
@@ -200,10 +199,51 @@ class MysqlAdapter
         }
 
         $query = "INSERT INTO `" . $this->database . "`.`" . $this->table . "` ";
-
         $query .= "(" . implode(', ', $rows) . ") ";
-
         $query .= "VALUES (" . implode(', ', $values) . ");";
+
+        if($this->unitTest) {
+            return $query;
+        }
+
+        if (!$this->opts['collect']) {
+            $this->query($query);
+        }
+        else {
+            $this->collectData .= "\n" . $query;
+        }
+
+        return NULL;
+    }
+
+
+    /**
+     * @param $fields
+     * @param $table
+     * @param null $where
+     * @return null|string
+     */
+    public function update($fields, $table, $where = null)
+    {
+        if ($table !== FALSE) {
+            $this->table = $table;
+        }
+
+        // There are no fields to update
+        if(count($fields) == 0) {
+            return NULL;
+        }
+
+        $sets = '';
+        foreach ($fields as $field => $value) {
+            $sets[] = "`".$field."` = '" . $this->webEscape($value) . "'";
+        }
+        $query  = "UPDATE `" . $this->database . "`.`" . $this->table . "` ";
+        $query .= "SET ".implode(", ", $sets);
+
+        if(!is_null($where)) {
+            $query .= " WHERE ".$where;
+        }
 
         if($this->unitTest) {
             return $query;
