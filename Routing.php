@@ -140,7 +140,7 @@ class Route
     {
         global $show404;
 
-        if($show404) return 404;
+        if($show404 || !isset($show404)) return 404;
         return 200;
     }
 
