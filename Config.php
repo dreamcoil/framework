@@ -11,11 +11,8 @@ class Config
      */
     public function __construct()
     {
-
         $file = __DIR__ . '/../app/_conf.php';
-
         $this->config = include $file;
-
     }
 
     /**
@@ -26,17 +23,18 @@ class Config
      */
     public function get($key)
     {
+        global $dreamcoilLoadedConfig;
+        
+        if(isset($this->config[$key])) return $this->config[$key];
 
-        if(isset( $this->config[$key])) return $this->config[$key];
+        if(!isset($dreamcoilLoadedConfig)) {
+            $file = __DIR__ . '/../app/_conf.php';
+            $dreamcoilLoadedConfig = include $file;
+        }
 
-        $file = __DIR__ . '/../app/_conf.php';
-
-        $config = include $file;
-
-        if(isset($config[$key])) return $config[$key];
+        if(isset($dreamcoilLoadedConfig[$key])) return $dreamcoilLoadedConfig[$key];
 
         return null;
-
     }
 
 }
