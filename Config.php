@@ -25,8 +25,6 @@ class Config
     {
         global $dreamcoilLoadedConfig;
         
-        if(isset($this->config[$key])) return $this->config[$key];
-
         if(!isset($dreamcoilLoadedConfig)) {
             $file = __DIR__ . '/../app/_conf.php';
             $dreamcoilLoadedConfig = include $file;
