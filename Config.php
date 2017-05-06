@@ -19,7 +19,7 @@ class Config
      * Gets the value for the config key
      * 
      * @param $key
-     * @return null|string
+     * @return null|string|array|int
      */
     public function get($key)
     {
