@@ -7,7 +7,7 @@ class Verify
 
 	public static function email($email)
 	{
-		if(filter_var(idn_to_ascii($email), FILTER_VALIDATE_EMAIL) !== false) return true;
+		if(filter_var(\idn_to_ascii($email), FILTER_VALIDATE_EMAIL) !== false) return true;
 		return false;
 	}
 
