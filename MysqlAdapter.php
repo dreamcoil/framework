@@ -9,7 +9,7 @@ class MysqlAdapter
     private $password;
     private $database;
     private $port;
-    private $unitTest;
+    public $unitTest;
 
     /**
      * @var \mysqli
