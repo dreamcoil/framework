@@ -117,6 +117,7 @@ class View
      * Returns a view
      *
      * @param $view
+     * @return mixed|string
      */
     public function get($view)
     {
