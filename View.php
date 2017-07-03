@@ -137,6 +137,19 @@ class View
         require $this->getFile($this->getPath($view));
 
     }
-
-
+    
+    /**
+     * Returns a JSON response
+     *
+     * @param array|string $view
+     */
+    public static function json($json) 
+    {
+        if(!is_string($json)) {
+            $json = json_encode($json);
+        }
+        
+        header('Content-Type: application/json');
+        die($json);
+    }
 }
