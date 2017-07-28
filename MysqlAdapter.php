@@ -31,8 +31,8 @@ class MysqlAdapter
      */
     public function __construct($host, $user, $password, $database, $port = 3306, array $opts = array())
     {
-
         $this->opts['collect'] = FALSE;
+        $this->opts['webEscape'] = TRUE;
 
         $this->host = $host;
         $this->user = $user;
@@ -43,7 +43,27 @@ class MysqlAdapter
         $this->opts = array_merge($this->opts, $opts);
 
         $this->unitTest = FALSE;
+    }
 
+    /**
+     * @param string $option
+     * @throws \Exception
+     */
+    private function existsOption($option)
+    {
+        if(!isset($this->opts[$option])) {
+            throw new \Exception("MysqlAdapter option '".$option."' doesn't exists");
+        }
+    }
+
+    /**
+     * @param string $option
+     * @param mixed $value
+     */
+    public function setOption($option, $value)
+    {
+        $this->existsOption($option);
+        $this->opts[$option] = $value;
     }
 
     /**
@@ -192,7 +212,10 @@ class MysqlAdapter
             if ($content == NULL && $content != "") {
                 $values[$i] = "NULL";
             } else {
-                $values[$i] = "'" . $this->webEscape($content) . "'";
+                if($this->opts['webEscape']) {
+                    $content = $this->webEscape($content);
+                }
+                $values[$i] = "'" . $content . "'";
             }
 
             $i++;
