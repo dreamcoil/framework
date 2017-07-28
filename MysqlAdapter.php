@@ -2,6 +2,17 @@
 
 namespace Dreamcoil;
 
+function refValues($arr){
+    if (strnatcmp(phpversion(),'5.3') >= 0) //Reference is required for PHP 5.3+
+    {
+        $refs = array();
+        foreach($arr as $key => $value)
+            $refs[$key] = &$arr[$key];
+        return $refs;
+    }
+    return $arr;
+}
+
 class MysqlAdapter
 {
     private $host;
@@ -18,9 +29,9 @@ class MysqlAdapter
     private $table;
     private $opts;
     private $collectData;
-	
-	/**
- 	 * Creates a Mysql Connection
+
+    /**
+     * Creates a Mysql Connection
      *
      * @param $host
      * @param $user
@@ -85,9 +96,9 @@ class MysqlAdapter
      */
     public function checkConnection()
     {
-		if(is_bool($this->getInterface()) || is_null($this->getInterface())) {
-			return false;
-		}
+        if(is_bool($this->getInterface()) || is_null($this->getInterface())) {
+            return false;
+        }
 
         if (null !== $this->getInterface()->connect_error) {
             throw new \Dreamcoil\Exception\MysqlAdapter($this->getInterface()->connect_errno." (".$this->getInterface()->connect_errno.")");
@@ -97,7 +108,7 @@ class MysqlAdapter
     }
 
     /**
-     * @TODO: Build a better destructer 
+     * @TODO: Build a better destructer
      */
     public function __destruct()
     {
@@ -106,7 +117,7 @@ class MysqlAdapter
         }
     }
 
-	/**
+    /**
      * Runs a query and returns the result
      *
      * @param $query
@@ -115,19 +126,19 @@ class MysqlAdapter
      */
     public function query($query)
     {
-		global $dreamcoilMysqliQueries;
-		if(!isset($dreamcoilMysqliQueries)) {
-		    $dreamcoilMysqliQueries = [];
+        global $dreamcoilMysqliQueries;
+        if(!isset($dreamcoilMysqliQueries)) {
+            $dreamcoilMysqliQueries = [];
         }
         $dreamcoilMysqliQueries[] = $query;
 
         $this->checkConnection();
 
-		$result = $this->getInterface()->query($query);
+        $result = $this->getInterface()->query($query);
         return $result;
     }
 
-	/**
+    /**
      * Runs multiple query and returns the result
      *
      * @param $querys
@@ -144,7 +155,7 @@ class MysqlAdapter
     }
 
 
-	/**
+    /**
      * @param bool $tableName
      * @return string
      */
@@ -161,7 +172,7 @@ class MysqlAdapter
     /**
      * Fetches the data from a query and returns it in an array
      *
-     * @param $result   
+     * @param $result
      * @return array
      */
     public function fetch_array(\mysqli_result $result)
@@ -170,11 +181,11 @@ class MysqlAdapter
         $return = [];
         while($data = $this->fetch($result))
         {
-          		$return[$i] = $data;
-            	$i++;
+            $return[$i] = $data;
+            $i++;
         }
 
-     	return $return;
+        return $return;
     }
 
     /**
@@ -204,17 +215,20 @@ class MysqlAdapter
         }
 
         $i = 0;
-        $rows = $values = [];
+        $rows = $values = $questionMarks = $vars = [];
         foreach ($data as $row => $content) {
 
             $rows[$i] = "`" . $row . "`";
+            $questionMarks[$i] = "?";
 
-            if ($content == NULL && $content != "") {
-                $values[$i] = "NULL";
+
+            if ($content === NULL) {
+                $values[$i] = $vars[$i] = "NULL";
             } else {
                 if($this->opts['webEscape']) {
                     $content = $this->webEscape($content);
                 }
+                $vars[$i] = $content;
                 $values[$i] = "'" . $content . "'";
             }
 
@@ -223,14 +237,35 @@ class MysqlAdapter
 
         $query = "INSERT INTO `" . $this->database . "`.`" . $this->table . "` ";
         $query .= "(" . implode(', ', $rows) . ") ";
+        $preparedQuery = $query;
         $query .= "VALUES (" . implode(', ', $values) . ");";
+        $preparedQuery .= "VALUES (" . implode(', ', $questionMarks) . ");";
 
         if($this->unitTest) {
             return $query;
         }
 
         if (!$this->opts['collect']) {
-            $this->query($query);
+            $statement = $this->getInterface()->prepare($preparedQuery);
+            $var_types = '';
+            foreach ($vars as $var) {
+                $var_type = gettype($var);
+                if($var_type == 'integer') {
+                    $var_type = 'i';
+                } else if($var_type == 'double') {
+                    $var_type = 'd';
+                } else if($var_type == 'string') {
+                    $var_type = 's';
+                } else {
+                    throw new \Exception("MysqlAdapter cannot bind ".var_export($var, true).":".$var_type);
+                }
+                $var_types .= $var_type;
+            }
+
+            $vars = array_merge([-1 => $var_types], $vars);
+
+            call_user_func_array(array($statement, "bind_param"), refValues($vars));
+            $statement->execute();
         }
         else {
             $this->collectData .= "\n" . $query;
@@ -293,24 +328,24 @@ class MysqlAdapter
      */
     public function stat()
     {
-		if($this->checkConnection())
-		{
+        if($this->checkConnection())
+        {
             return $this->getInterface()->stat();
-    	}
-    	else throw new \Dreamcoil\Exception\MysqlAdapter("Mysql Connection failed");
+        }
+        else throw new \Dreamcoil\Exception\MysqlAdapter("Mysql Connection failed");
     }
 
-	/**
-	 * Escapes an data for a query
-	 *
+    /**
+     * Escapes an data for a query
+     *
      * @param string $data
      * @param bool $reverse
      * @return string
      */
     public function webEscape($data, $reverse = false)
     {
-    	$data = str_replace($this->webEscapeCharacters($reverse)[0], $this->webEscapeCharacters($reverse)[1], $data);
-    	return $data;
+        $data = str_replace($this->webEscapeCharacters($reverse)[0], $this->webEscapeCharacters($reverse)[1], $data);
+        return $data;
     }
 
     /**
@@ -327,28 +362,28 @@ class MysqlAdapter
         return [$array1, $array2];
     }
 
-	public static function getExecutedQuerys()
-	{
-		global $dreamcoilMysqliQueries;
-		if(isset($dreamcoilMysqliQueries)) {
-		    return $dreamcoilMysqliQueries;
+    public static function getExecutedQuerys()
+    {
+        global $dreamcoilMysqliQueries;
+        if(isset($dreamcoilMysqliQueries)) {
+            return $dreamcoilMysqliQueries;
         }
         return [];
-	}
-	
-	/**
-	 * @return array
-	 */
-	public function getCredentials()
-	{
-		$cred = [
-			"host" => $this->host,
-			"user" => $this->user,
-			"password" =>  $this->password,
-			"database" =>  $this->database
-		];
-		return $cred;
-	}
+    }
+
+    /**
+     * @return array
+     */
+    public function getCredentials()
+    {
+        $cred = [
+            "host" => $this->host,
+            "user" => $this->user,
+            "password" =>  $this->password,
+            "database" =>  $this->database
+        ];
+        return $cred;
+    }
 
     /**
      * @return \mysqli
