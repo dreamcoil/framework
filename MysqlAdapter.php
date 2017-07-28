@@ -259,7 +259,10 @@ class MysqlAdapter
 
         $sets = '';
         foreach ($fields as $field => $value) {
-            $sets[] = "`".$field."` = '" . $this->webEscape($value) . "'";
+            if($this->opts['webEscape']) {
+                $value = $this->webEscape($value);
+            }
+            $sets[] = "`".$field."` = '" . $value . "'";
         }
         $query  = "UPDATE `" . $this->database . "`.`" . $this->table . "` ";
         $query .= "SET ".implode(", ", $sets);
