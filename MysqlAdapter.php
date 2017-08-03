@@ -247,6 +247,10 @@ class MysqlAdapter
 
         if (!$this->opts['collect']) {
             $statement = $this->getInterface()->prepare($preparedQuery);
+            if($statement === false) {
+                throw new \Exception("Can't prepare Mysql Query: ".$preparedQuery);
+            }
+            
             $var_types = '';
             foreach ($vars as $var) {
                 $var_type = gettype($var);
