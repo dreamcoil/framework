@@ -4,15 +4,15 @@ namespace Dreamcoil;
 
 class Config
 {
-    private $config;
 
     /**
      * Loads the config
      */
     public function __construct()
-    {
-        $file = __DIR__ . '/../app/_conf.php';
-        $this->config = include $file;
+    {       
+        global $dreamcoilLoadedConfig;
+        
+        $dreamcoilLoadedConfig = include __DIR__ . '/../app/_conf.php';
     }
 
     /**
@@ -21,7 +21,7 @@ class Config
      * @param $key
      * @return null|string|array|int
      */
-    public function get($key)
+    public static function get($key)
     {
         global $dreamcoilLoadedConfig;
         
@@ -30,7 +30,9 @@ class Config
             $dreamcoilLoadedConfig = include $file;
         }
 
-        if(isset($dreamcoilLoadedConfig[$key])) return $dreamcoilLoadedConfig[$key];
+        if(isset($dreamcoilLoadedConfig[$key])) {
+            return $dreamcoilLoadedConfig[$key];
+        }
 
         return null;
     }
