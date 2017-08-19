@@ -35,7 +35,7 @@ class Dreamcoil
 		if(is_null($full)) $protocol = '//';
 
 		if($full || is_null($full)) {
-		    if(isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] != '80' || $_SERVER['SERVER_PORT'] != '443')) {
+		    if(isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] != 80 || $_SERVER['SERVER_PORT'] != 443)) {
             	return $protocol . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . $path;
             }
 		    return $protocol  . $_SERVER['SERVER_NAME'] . $path;
