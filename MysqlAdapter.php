@@ -298,10 +298,14 @@ class MysqlAdapter
 
         $sets = '';
         foreach ($fields as $field => $value) {
-            if($this->opts['webEscape']) {
+            if($this->opts['webEscape'] && !is_null($value)) {
                 $value = $this->webEscape($value);
             }
-            $sets[] = "`".$field."` = '" . $value . "'";
+            if(is_null($value)) {
+                $sets[] = "`".$field."` = NULL";
+            } else {
+                $sets[] = "`".$field."` = '" . $value . "'";
+            }
         }
         $query  = "UPDATE `" . $this->database . "`.`" . $this->table . "` ";
         $query .= "SET ".implode(", ", $sets);
