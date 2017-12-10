@@ -296,7 +296,7 @@ class MysqlAdapter
             return NULL;
         }
 
-        $sets = '';
+        $sets = [];
         foreach ($fields as $field => $value) {
             if($this->opts['webEscape'] && !is_null($value)) {
                 $value = $this->webEscape($value);
