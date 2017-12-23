@@ -223,7 +223,8 @@ class MysqlAdapter
 
 
             if (is_null($content)) {
-                $values[$i] = $vars[$i] = "NULL";
+                $values[$i] = "NULL";
+                $vars[$i] = null;
             } else {
                 if($this->opts['webEscape']) {
                     $content = $this->webEscape($content);
@@ -258,7 +259,7 @@ class MysqlAdapter
                     $var_type = 'i';
                 } else if($var_type == 'double') {
                     $var_type = 'd';
-                } else if($var_type == 'string') {
+                } else if($var_type == 'string' || is_null($var)) {
                     $var_type = 's';
                 } else {
                     throw new \Exception("MysqlAdapter cannot bind ".var_export($var, true).":".$var_type);
