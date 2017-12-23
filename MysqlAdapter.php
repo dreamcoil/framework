@@ -222,7 +222,7 @@ class MysqlAdapter
             $questionMarks[$i] = "?";
 
 
-            if ($content === NULL) {
+            if (is_null($content)) {
                 $values[$i] = $vars[$i] = "NULL";
             } else {
                 if($this->opts['webEscape']) {
