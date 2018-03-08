@@ -271,6 +271,8 @@ class MysqlAdapter
 
             call_user_func_array(array($statement, "bind_param"), refValues($vars));
             $statement->execute();
+
+            return $statement->id;
         }
         else {
             $this->collectData .= "\n" . $query;
