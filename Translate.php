@@ -52,11 +52,15 @@ class Translate
 
         $file = Translate::lookUpFile($lang, $key[0]);
 
-        if (isset($file[$key[1]])) {
+        $restKey = $key;
+        unset($key[0]);
+        $restKey = implode(".", $key);
+
+        if (isset($file[$restKey])) {
         	$result = str_replace(
 	            ['ü',     'ö',     'ä',     'Ü',     'Ö',     'Ä',     'ß'], 
 	            ['&uuml;','&ouml;','&auml;','&Uuml;','&Ouml;','&Auml;','&szlig;'], 
-	            $file[$key[1]]
+	            $file[$restKey]
 	        );
 
         	foreach($placeholders as $name => $value)
