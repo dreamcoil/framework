@@ -54,7 +54,7 @@ class Translate
 
         $restKey = $key;
         unset($restKey[0]);
-        $restKey = implode(".", $key);
+        $restKey = implode(".", $restKey);
 
         if (isset($file[$restKey])) {
         	$result = str_replace(
