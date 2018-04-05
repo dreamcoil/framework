@@ -53,7 +53,7 @@ class Translate
         $file = Translate::lookUpFile($lang, $key[0]);
 
         $restKey = $key;
-        unset($key[0]);
+        unset($restKey[0]);
         $restKey = implode(".", $key);
 
         if (isset($file[$restKey])) {
