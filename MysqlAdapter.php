@@ -116,8 +116,10 @@ class MysqlAdapter
             $this->query($this->collectData);
         }
 
-        $this->interface->close();
-        $this->interface = null;
+        if(!is_null($this->interface)) {
+            $this->interface->close();
+            $this->interface = null;
+        }
     }
 
     /**
