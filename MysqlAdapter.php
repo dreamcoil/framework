@@ -115,6 +115,9 @@ class MysqlAdapter
         if ($this->opts['collect']) {
             $this->query($this->collectData);
         }
+
+        $this->interface->close();
+        $this->interface = null;
     }
 
     /**
