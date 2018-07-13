@@ -57,13 +57,14 @@ class Translate
         $restKey = implode(".", $restKey);
 
         if (isset($file[$restKey])) {
+            $result = $file[$restKey];
         	if(!defined("DISABLE_DREAMCOIL_TRANSLATE_HTML_ESCAPE")) {
-			$result = str_replace(
-			    ['ü',     'ö',     'ä',     'Ü',     'Ö',     'Ä',     'ß'], 
-			    ['&uuml;','&ouml;','&auml;','&Uuml;','&Ouml;','&Auml;','&szlig;'], 
-			    $file[$restKey]
-			);
-		}
+                $result = str_replace(
+                    ['ü',     'ö',     'ä',     'Ü',     'Ö',     'Ä',     'ß'],
+                    ['&uuml;','&ouml;','&auml;','&Uuml;','&Ouml;','&Auml;','&szlig;'],
+                    $result
+                );
+            }
 
         	foreach($placeholders as $name => $value)
         	{
